@@ -1,0 +1,7 @@
+{
+  "name": "Hospital",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
