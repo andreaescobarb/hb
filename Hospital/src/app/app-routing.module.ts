@@ -16,7 +16,11 @@ const routes: Routes = [
     path: 'members',
     canActivate: [AuthGuardService],
     loadChildren: () => import('./members/member-routing.module').then( m => m.MemberRoutingModule)
+  },  {
+    path: 'user-data',
+    loadChildren: () => import('./public/user-data/user-data.module').then( m => m.UserDataPageModule)
   }
+
 ];
 
 @NgModule({
