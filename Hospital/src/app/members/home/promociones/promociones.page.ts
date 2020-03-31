@@ -11,5 +11,4 @@ export class PromocionesPage implements OnInit {
 
   ngOnInit() {
   }
-
 }
