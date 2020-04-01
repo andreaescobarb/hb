@@ -1,27 +1,22 @@
-import { AuthGuardService } from './services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)},
+  {
+    path: 'user-data',
+    loadChildren: () => import('./pages/user-data/user-data.module').then( m => m.UserDataPageModule)
+  },
   {
     path: 'login',
-    loadChildren: () => import('./public/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('./public/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'members',
-    canActivate: [AuthGuardService],
-    loadChildren: () => import('./members/member-routing.module').then( m => m.MemberRoutingModule)
-  },  {
-    path: 'user-data',
-    loadChildren: () => import('./public/user-data/user-data.module').then( m => m.UserDataPageModule)
+    path: 'menu',
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   }
-
-];
+  ];
 
 @NgModule({
   imports: [
