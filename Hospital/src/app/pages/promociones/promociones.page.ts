@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PromocionesControllerService } from 'src/app/services/promociones-controller.service';
 
 @Component({
   selector: 'app-promociones',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./promociones.page.scss'],
 })
 export class PromocionesPage implements OnInit {
-
-  constructor() { }
+  promociones:Observable<any>;
+  constructor(private controller:PromocionesControllerService) { }
 
   ngOnInit() {
+    this.promociones = this.controller.getPromociones();
   }
 
 }

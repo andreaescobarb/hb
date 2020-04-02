@@ -13,13 +13,21 @@ const routes: Routes = [
         loadChildren: () => import('../servicios/servicios.module').then(m => m.ServiciosPageModule)
       },
       {
+        path: 'servicios/:id',
+        loadChildren: () => import('../servicios-details/servicios-details.module').then(m => m.ServiciosDetailsPageModule)
+      },
+      {
         path: 'citas',
         loadChildren: () => import('../citas/citas.module').then(m => m.CitasPageModule)
       },
       {
         path: 'promociones',
         loadChildren: () => import('../promociones/promociones.module').then(m => m.PromocionesPageModule)
-      }
+      },
+      {
+        path: 'promociones/:id',
+        loadChildren: () => import('../promociones-details/promociones-details.module').then(m => m.PromocionesDetailsPageModule)
+      },
     ]
   },
   {
