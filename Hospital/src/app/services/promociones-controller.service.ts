@@ -12,9 +12,11 @@ export class PromocionesControllerService {
   }
 
   getPromociones(): Observable<any>{
-    return this.http.get(this.url).pipe(map(results => {
+    var urll = this.url;
+    urll += "ListarPromociones";
+    return this.http.post(urll,{}).pipe(map(results => {
       console.log(results);
-      return results;
+      return results['Data'];
     }));
   }
   getDetails(promocion: String){

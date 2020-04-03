@@ -13,9 +13,11 @@ export class ServiciosControllerService {
   constructor(private http:HttpClient) { 
   }
   getServicios(): Observable<any>{
-    return this.http.get(this.url).pipe(map(results => {
+    var urll = this.url;
+    urll += "ListarServicios";
+    return this.http.post(urll,{}).pipe(map(results => {
       console.log(results);
-      return results;
+      return results['Data'];
     }));
   }
   getDetails(servicio: String){
