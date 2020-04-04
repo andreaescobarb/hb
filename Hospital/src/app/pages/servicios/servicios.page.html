@@ -1,16 +1,11 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>Servicios</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item button *ngFor="let r of (servicios | async)" [routerLink]="['/','menu', '/', 'tabs', '/', 'tabs', '/', 'servicios', r.Id]">
-      {{r.Nombre}}
-    </ion-item>
-  </ion-list>
+<ion-content padding>
+  <ion-slides pager="true" loop="true">
+    <ion-slide *ngFor="let servicio of lstServicios">
+      <h5 style="color:cadetblue;">{{servicio.nombreServicio}}</h5>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
