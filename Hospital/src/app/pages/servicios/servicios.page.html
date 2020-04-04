@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-title>Servicios</ion-title>
+</ion-header>
+
+<ion-content padding>
+  <ion-slides pager="true" loop="true">
+    <ion-slide *ngFor="let servicio of lstServicios">
+      <h5 style="color:cadetblue;">{{servicio.nombreServicio}}</h5>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

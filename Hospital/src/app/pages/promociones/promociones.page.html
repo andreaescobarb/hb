@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Promociones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let r of (promociones | async)" [routerLink]="['/','menu', '/', 'tabs', '/', 'tabs', '/', 'promociones', r.Id]">
+      {{r.Nombre}}
+    </ion-item>
+  </ion-list>
+</ion-content>
