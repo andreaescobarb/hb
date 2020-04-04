@@ -1,11 +1,16 @@
 <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Servicios</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-slides pager="true" loop="true">
-    <ion-slide *ngFor="let servicio of lstServicios">
-      <h5 style="color:cadetblue;">{{servicio.nombreServicio}}</h5>
+  <ion-list padding mode="ios">
+    <ion-slide *ngFor="let servicio of servicios">
+      <h5 >{{servicio.NombreServicio}}</h5>
     </ion-slide>
-  </ion-slides>
+  </ion-list>
 </ion-content>

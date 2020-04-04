@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Servicio } from '../servicio';
 
 export class Servicios{
   public idServicio: number;
@@ -22,16 +23,24 @@ export class Servicios{
   providedIn: 'root'
 })
 export class ServiciosControllerService {
-  url = 'https://localhost:44356/api/HOSPAPI/ListarServicios';
+  url = 'https://localhost:44380//api/servicio';
   //apiKey="?"
 
   constructor(private http:HttpClient) { 
   }
-  getServicios(): Observable<any>{
-    var urll = this.url;
-    urll += "ListarServicios";
-    return this.http.post(this.url,{});
+  getServicios = (): Promise<Servicio> => {
+    let promise = new Promise<Servicio>((resolve, reject) => {
+        this.http.get(this.url)
+        .toPromise()
+        .then( (response) => {
+          resolve(response as Servicio);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
   }
+  
   getDetails(servicio: String){
     var secondurl = 'http://localhost:59328/Servicios/Details/';
     secondurl += servicio;
