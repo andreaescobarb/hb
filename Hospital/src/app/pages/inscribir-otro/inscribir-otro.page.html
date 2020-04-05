@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref = "/menu/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Datos Personales
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="floating">Primer Nombre</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <p></p>
+  <ion-item>
+    <ion-label position="floating">Primer Apellido</ion-label>
+    <ion-input type = "text"></ion-input>
+  </ion-item>
+  <p></p>
+  <ion-item>
+    <ion-label position="floating">Segundo Apellido</ion-label>
+    <ion-input type = "text"></ion-input>
+  </ion-item>
+  <p></p>
+  <ion-item>
+    <ion-label position="floating">Identidad</ion-label>
+    <ion-input type = "text"></ion-input>
+  </ion-item>
+  <p></p>
+  <ion-item>
+    <ion-label>Género</ion-label>
+    <ion-select mode="ios" placeholder="Seleccione uno">
+      <ion-select-option value="f">Femenino</ion-select-option>
+      <ion-select-option value="m">Masculino</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button routerLink="/menu/inscribir-otro" shape="round" color = "primary" expand = "block">Register</ion-button>
+</ion-content>
