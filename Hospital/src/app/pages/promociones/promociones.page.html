@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list padding mode="ios">
-    <ion-slide *ngFor="let promo of promociones">
-      <h5 >{{promo.NombrePromocion}}</h5>
-    </ion-slide>
+  <ion-list mode="ios" inset="true" lines="full">
+    <ion-item button *ngFor="let promo of promociones" (click)="detail(promo.IDPromocion)">
+      <ion-label text-wrap>{{promo.NombrePromocion}}</ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

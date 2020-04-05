@@ -9,8 +9,7 @@
 
 <ion-content padding>
   <ion-list mode="ios" inset="true" lines="full">
-    <ion-item button *ngFor="let servicio of (servicios | async)" 
-    [routerLink]="['/', 'menu', '/', 'tabs', '/', 'tabs', '/', 'servicios', servicio.IDServicio]">
+    <ion-item button *ngFor="let servicio of servicios" (click)="detail(servicio.IDServicio)">
       <ion-label text-wrap>{{servicio.NombreServicio}}</ion-label>
     </ion-item>
   </ion-list>

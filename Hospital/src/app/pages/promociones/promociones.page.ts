@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Promocion } from './../../servicio';
 import { Component, OnInit } from '@angular/core';
 import { PromocionesControllerService } from 'src/app/services/promociones-controller.service';
@@ -9,7 +10,8 @@ import { PromocionesControllerService } from 'src/app/services/promociones-contr
 })
 export class PromocionesPage implements OnInit {
   promociones:Promocion;
-  constructor(private controller:PromocionesControllerService) { }
+  details = "/menu/tabs/tabs/promociones/";
+  constructor(private controller:PromocionesControllerService, private router:Router) { }
   
   ngOnInit() {
     this.getLstPromociones();
@@ -20,6 +22,10 @@ export class PromocionesPage implements OnInit {
     }, (error) => {
       alert("Error: " + error.statusText);
     })
+  }
+  detail(id){
+    let ruta = this.details + id;
+    this.router.navigateByUrl(ruta);
   }
 
 }

@@ -14,7 +14,6 @@ export class ServiciosDetailsPage implements OnInit {
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    
   }
 
 }

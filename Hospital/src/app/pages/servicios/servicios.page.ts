@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ServiciosControllerService } from './../../services/servicios-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../../servicio';
@@ -10,7 +11,8 @@ import { Servicio } from '../../servicio';
 
 export class ServiciosPage implements OnInit {
   servicios: Servicio;
-  constructor(private controller: ServiciosControllerService) {
+  details = "/menu/tabs/tabs/servicios/";
+  constructor(private controller: ServiciosControllerService, private router:Router) {
   }
 
   ngOnInit() {
@@ -23,6 +25,11 @@ export class ServiciosPage implements OnInit {
     }, (error) => {
       alert("Error: " + error.statusText);
     })
+  }
+  
+  detail(id){
+    let ruta = this.details + id;
+    this.router.navigateByUrl(ruta);
   }
 }
 

@@ -1,3 +1,4 @@
+import { Promocion } from './../../servicio';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PromocionesControllerService } from 'src/app/services/promociones-controller.service';
@@ -8,7 +9,7 @@ import { PromocionesControllerService } from 'src/app/services/promociones-contr
   styleUrls: ['./promociones-details.page.scss'],
 })
 export class PromocionesDetailsPage implements OnInit {
-  promocion = null;
+  promocion:Promocion;
   constructor(private activatedRoute: ActivatedRoute, private controller:PromocionesControllerService) { }
 
   ngOnInit() {
