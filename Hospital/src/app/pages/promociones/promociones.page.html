@@ -8,6 +8,12 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content color="primary"
+      pullingIcon="lines"
+      refreshingSpinner="lines">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list mode="ios" inset="true" lines="full">
     <ion-item button *ngFor="let promo of promociones" (click)="detail(promo.IDPromocion)">
       <ion-label text-wrap>{{promo.NombrePromocion}}</ion-label>
