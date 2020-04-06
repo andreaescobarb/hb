@@ -36,7 +36,7 @@ export class PromocionesControllerService {
   })
   return promise;
   }
-  getPaquete = (id): Promise<ServiciosEnPromocion>{
+  getPaquete = (id): Promise<ServiciosEnPromocion> => {
     let urll = 'https://localhost:44380/api/ServiciosEnPromocion/' + id;
     let promise = new Promise<ServiciosEnPromocion>((resolve, reject) => {
       this.http.get(urll)

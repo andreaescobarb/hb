@@ -10,38 +10,49 @@ import { ServiciosControllerService } from 'src/app/services/servicios-controlle
   styleUrls: ['./promociones-details.page.scss'],
 })
 export class PromocionesDetailsPage implements OnInit {
-  promocion:Promocion;
-  paquete:ServiciosEnPromocion;
-  servicios:Servicio;
-  //servicios:ServiciosEnPromocion;
-  constructor(private activatedRoute: ActivatedRoute, private controller:PromocionesControllerService, private controlador:ServiciosControllerService) { }
-  id:string;
+  promocion: Promocion = null;
+  paquete: ServiciosEnPromocion = null;
+  servicios: Array<Servicio> = new Array<Servicio>();
+  Ahorro: number = 0;
+  constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService) { }
+  id: string;
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getPromocion();
-    this.getServiciosEnPromo();
-    this.getServicios();
   }
   getPromocion() {
-    this.controller.getDetails(this.id).then( (response) =>{
+    this.controller.getDetails(this.id).then((response) => {
       this.promocion = response;
+      this.getServiciosEnPromo();
     }, (error) => {
       console.log("Error: " + error.statusText);
     })
   }
-  getServiciosEnPromo(){
-    this.controller.getPaquete(this.id).then( (response) =>{
+  getServiciosEnPromo() {
+    this.controller.getPaquete(this.id).then((response) => {
       this.paquete = response;
+      this.getServicios();
     }, (error) => {
       console.log("Error: " + error.statusText);
     })
   }
-  getServicios(){
-    this.controlador.getDetails(this.paquete.IDServicio).then( (response) =>{
-      this.servicios = response;
-    }, (error) => {
-      console.log("Error: " + error.statusText);
-    })
+  getServicios() {
+    for (let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)) {
+      this.controlador.getDetails(data.IDServicio).then((response) => {
+        this.servicios.push(response);
+        this.getAhorro();
+      }, (error) => {
+        console.log("Error: " + error.statusText);
+      })
+    }
+  }
+  getAhorro() {
+    for (let data of this.servicios) {
+      this.Ahorro += data.Precio;
+    }
+    for (let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)) {
+      this.Ahorro -= data.PrecioFinal;
+    }
   }
 
 }

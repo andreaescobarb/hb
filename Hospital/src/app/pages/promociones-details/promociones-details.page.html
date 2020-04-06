@@ -8,24 +8,23 @@
 
 <ion-content>
   <!-- Promo -->
-  <ion-list mode="ios" inset="true" lines="full">
-    <ion-item *ngFor="let promo of promocion">
-      <ion-label text-wrap>{{promo.NombrePromocion}}</ion-label>
-      <!-- ServiciosEnPromo -->
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title text-wrap>{{promo?.NombrePromocion}}</ion-card-title>
+      <ion-card-subtitle>{{promo?.Detalle}}</ion-card-subtitle>
+      <ion-label>Vence el: {{promo?.FecchaExpiracion}}</ion-label>
+    </ion-card-header>
+    <!-- Servicios -->
+    <ion-card-content>
       <ion-list mode="ios" inset="true" lines="full">
-        <ion-item *ngFor="let p of paquete">
-          <ion-label text-wrap>{{p.PrecioFinal}}</ion-label>
-          <!-- Servicios -->
-          <ion-list mode="ios" inset="true" lines="full">
-            <ion-item *ngFor="let servicio of servicios">
-              <ion-label text-wrap>{{servicio.NombreServicio}}</ion-label>
-            </ion-item>
-          </ion-list>
-
+        <ion-item *ngFor="let servicio of servicios">
+          <ion-label text-wrap>{{servicio?.NombreServicio}}</ion-label>
         </ion-item>
       </ion-list>
-
-    </ion-item>
-  </ion-list>
+  </ion-card-content>
+  <ionfooter>
+    <ion-label text-wrap>Ahorro Total: {{Ahorro}}</ion-label>
+  </ion-footer>
+  </ion-card>
 
 </ion-content>

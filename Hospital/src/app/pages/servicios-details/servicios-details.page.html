@@ -7,9 +7,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list mode="ios" inset="true" lines="full">
-    <ion-item *ngFor="let serv of servicio">
-      <ion-label text-wrap>{{serv.NombreServicio}}</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title text-wrap>{{servicio?.NombreServicio}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>Recomendaciones: {{servicio?.Recomendaciones}}</ion-card-content>
+  </ion-card>
 </ion-content>
