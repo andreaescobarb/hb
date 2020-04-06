@@ -10,19 +10,22 @@ import { ServiciosControllerService } from 'src/app/services/servicios-controlle
   styleUrls: ['./promociones-details.page.scss'],
 })
 export class PromocionesDetailsPage implements OnInit {
-  promocion: Promocion = null;
-  paquete: ServiciosEnPromocion = null;
+  promocion: Promocion;
+  paquete: ServiciosEnPromocion;
   servicios: Array<Servicio> = new Array<Servicio>();
+  id: string;
   Ahorro: number = 0;
   constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService) { }
-  id: string;
-  ngOnInit() {
+  ionViewWillEnter(){
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getPromocion();
+  }
+  ngOnInit() {
   }
   getPromocion() {
     this.controller.getDetails(this.id).then((response) => {
       this.promocion = response;
+      console.log('Hay Promo');
       this.getServiciosEnPromo();
     }, (error) => {
       console.log("Error: " + error.statusText);
@@ -31,6 +34,7 @@ export class PromocionesDetailsPage implements OnInit {
   getServiciosEnPromo() {
     this.controller.getPaquete(this.id).then((response) => {
       this.paquete = response;
+      console.log('Hay Paquete');
       this.getServicios();
     }, (error) => {
       console.log("Error: " + error.statusText);
@@ -40,6 +44,7 @@ export class PromocionesDetailsPage implements OnInit {
     for (let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)) {
       this.controlador.getDetails(data.IDServicio).then((response) => {
         this.servicios.push(response);
+        console.log('Hay Servicio');
         this.getAhorro();
       }, (error) => {
         console.log("Error: " + error.statusText);

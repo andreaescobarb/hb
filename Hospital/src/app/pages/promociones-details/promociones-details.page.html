@@ -12,7 +12,7 @@
     <ion-card-header>
       <ion-card-title text-wrap>{{promo?.NombrePromocion}}</ion-card-title>
       <ion-card-subtitle>{{promo?.Detalle}}</ion-card-subtitle>
-      <ion-label>Vence el: {{promo?.FecchaExpiracion}}</ion-label>
+      <ion-label>Vence el: {{promo?.FechaExpiracion}}</ion-label>
     </ion-card-header>
     <!-- Servicios -->
     <ion-card-content>
@@ -21,10 +21,10 @@
           <ion-label text-wrap>{{servicio?.NombreServicio}}</ion-label>
         </ion-item>
       </ion-list>
-  </ion-card-content>
-  <ionfooter>
-    <ion-label text-wrap>Ahorro Total: {{Ahorro}}</ion-label>
-  </ion-footer>
+    </ion-card-content>
+    <ion-footer>
+      <ion-label text-wrap>Ahorro Total: {{Ahorro}}</ion-label>
+    </ion-footer>
   </ion-card>
 
 </ion-content>
