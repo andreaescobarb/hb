@@ -7,4 +7,25 @@
 </ion-header>
 
 <ion-content>
+  <!-- Promo -->
+  <ion-list mode="ios" inset="true" lines="full">
+    <ion-item *ngFor="let promo of promocion">
+      <ion-label text-wrap>{{promo.NombrePromocion}}</ion-label>
+      <!-- ServiciosEnPromo -->
+      <ion-list mode="ios" inset="true" lines="full">
+        <ion-item *ngFor="let p of paquete">
+          <ion-label text-wrap>{{p.PrecioFinal}}</ion-label>
+          <!-- Servicios -->
+          <ion-list mode="ios" inset="true" lines="full">
+            <ion-item *ngFor="let servicio of servicios">
+              <ion-label text-wrap>{{servicio.NombreServicio}}</ion-label>
+            </ion-item>
+          </ion-list>
+
+        </ion-item>
+      </ion-list>
+
+    </ion-item>
+  </ion-list>
+
 </ion-content>

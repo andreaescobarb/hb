@@ -24,4 +24,17 @@ export class ServiciosControllerService {
     })
     return promise;
   }
+  getDetails = (id): Promise<Servicio> => {
+    let urll = this.url + '/' + id;
+    let promise = new Promise<Servicio>((resolve, reject) => {
+      this.http.get(urll)
+      .toPromise()
+      .then( (response) => {
+        resolve(response as Servicio);
+      }, (error) => {
+        reject(error);
+      })
+  })
+  return promise;
+  }
 }
