@@ -19,3 +19,25 @@ export interface ServiciosEnPromocion {
     "PrecioFinal": number,
     "ID": number
 }
+
+export interface Paciente {
+    "IDPaciente": number,
+    "Nombre": string,
+    "Apellido": string,
+    "Apellido2": string,
+    "Identidad": string,
+    "IDNacionalidad": number,
+    "Edad": number,
+    "Genero": string,
+    "CiudadResidencia": number,
+    "Residencia": number,
+    "IDUsers": string
+}
+
+export interface User {
+    "IDUser": number,
+    "Correo": string,
+    "Password": string,
+    "Rol": number,
+    "Cotizaciones":number
+}
