@@ -4,14 +4,14 @@
       <ion-back-button defaultHref = "/login"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Register
+      Registrarse
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
   <form [formGroup]="frmSignup">
     <ion-item> 
-      <ion-label position="floating">Email</ion-label>
+      <ion-label position="floating">Correo</ion-label>
       <ion-input 
         type="Email" 
         #email="ngModel"
@@ -29,7 +29,7 @@
       </div>
     <p></p>
     <ion-item>
-      <ion-label position="floating">Password</ion-label>
+      <ion-label position="floating">Contraseña</ion-label>
       <ion-input 
         id = "password"
         type = "Password" 
@@ -41,7 +41,7 @@
     </ion-item>
     <p></p>
     <ion-item>
-      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-label position="floating">Confirmar Contraseña</ion-label>
       <ion-input
         id = "confirmPassword" 
         type = "Password"
@@ -57,6 +57,6 @@
       shape="round" 
       color = "primary" 
       expand = "block"
-    >Continue</ion-button>
+    >Continuar</ion-button>
   </form>
 </ion-content>
