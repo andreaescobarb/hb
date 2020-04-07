@@ -18,6 +18,8 @@ export class PromocionesDetailsPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService) { }
   ionViewWillEnter(){
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.Ahorro = 0;
+    
     this.getPromocion();
   }
   ngOnInit() {
@@ -25,7 +27,6 @@ export class PromocionesDetailsPage implements OnInit {
   getPromocion() {
     this.controller.getDetails(this.id).then((response) => {
       this.promocion = response;
-      console.log('Hay Promo');
       this.getServiciosEnPromo();
     }, (error) => {
       console.log("Error: " + error.statusText);
@@ -34,7 +35,6 @@ export class PromocionesDetailsPage implements OnInit {
   getServiciosEnPromo() {
     this.controller.getPaquete(this.id).then((response) => {
       this.paquete = response;
-      console.log('Hay Paquete');
       this.getServicios();
     }, (error) => {
       console.log("Error: " + error.statusText);
@@ -44,7 +44,6 @@ export class PromocionesDetailsPage implements OnInit {
     for (let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)) {
       this.controlador.getDetails(data.IDServicio).then((response) => {
         this.servicios.push(response);
-        console.log('Hay Servicio');
         this.getAhorro();
       }, (error) => {
         console.log("Error: " + error.statusText);
