@@ -10,10 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServiciosDetailsPage implements OnInit {
   servicio:Servicio;
+  id:string;
   constructor(private activatedRoute: ActivatedRoute, private controller:ServiciosControllerService) { }
-
-  ngOnInit() {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+  ionViewWillEnter(){
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getServicio();
   }
+  ngOnInit() {
+  }
+  getServicio() {
+    this.controller.getDetails(this.id).then( (response) =>{
+      this.servicio = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+
 
 }
