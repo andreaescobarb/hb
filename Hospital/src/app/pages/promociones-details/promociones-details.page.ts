@@ -19,9 +19,7 @@ export class PromocionesDetailsPage implements OnInit {
   ionViewWillEnter(){
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.Ahorro = 0;
-    this.promocion = null;
-    this.paquete = null;
-    this.servicios = new Array<Servicio>();
+    
     this.getPromocion();
   }
   ngOnInit() {
