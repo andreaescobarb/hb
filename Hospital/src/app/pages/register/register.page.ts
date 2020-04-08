@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ControlContainer } from '@angular/forms';
 import { CustomValidators } from '../../custom-validators';
-
+export var usermail;
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -39,6 +39,7 @@ export class RegisterPage implements OnInit {
         "Cotizaciones": 1
       };
       this.controller.create(usuariofinal as User);
+      usermail = this.usuario.correo;
       this.router.navigate(['user-data']);
     }
   }

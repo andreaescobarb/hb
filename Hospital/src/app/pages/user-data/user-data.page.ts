@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { Paciente } from './../../servicio';
 import { PacientesControllerService } from './../../services/pacientes-controller.service';
 import { Component, OnInit } from '@angular/core';
-import { mail } from '../login/login.page';
+import { usermail } from '../register/register.page';
 
 @Component({
   selector: 'app-user-data',
@@ -22,7 +23,7 @@ export class UserDataPage implements OnInit {
     "Residencia": 0,
     "IDUsers": ""
   };
-  constructor(private controller: PacientesControllerService) { }
+  constructor(private controller: PacientesControllerService, private router:Router) { }
 
   ngOnInit() {
   }
@@ -30,8 +31,9 @@ export class UserDataPage implements OnInit {
     if (this.paciente.Nombre!="" && this.paciente.Apellido!=""
     && this.paciente.Identidad!="" && this.paciente.Genero!=undefined
     && this.paciente.IDNacionalidad!=undefined) {
-      this.paciente.IDUsers = mail;
+      this.paciente.IDUsers = usermail;
       this.controller.create(this.paciente);
+      this.router.navigate(['menu','tabs']);
     }
   }
 

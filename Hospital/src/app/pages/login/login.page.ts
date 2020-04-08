@@ -27,7 +27,11 @@ export class LoginPage implements OnInit {
   valid():boolean{
     this.controller.getDetails(this.user.Correo).then((response)=>{
       this.temporal = response;
-      if(this.temporal?.Correo != ""){
+      var temp = "";
+      if(this.temporal){
+        temp = this.temporal.Correo;
+      }
+      if(temp != ""){
         return true;
       }else{
         return false;
