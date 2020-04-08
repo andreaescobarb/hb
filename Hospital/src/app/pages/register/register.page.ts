@@ -30,14 +30,14 @@ export class RegisterPage implements OnInit {
   userData() {
     console.log(this.usuario.correo);
     this.getUsusario();
-    if (this.tempuser == undefined || this.tempuser?.Correo != this.usuario.correo) {
+    if ((this.tempuser == undefined) || (this.tempuser.Correo != this.usuario.correo)){
       let usuariofinal = {
         "IDUser": 0,
         "Correo": this.usuario.correo,
         "Password": this.usuario.password,
         "Rol": 0,
         "Cotizaciones": 1
-      }
+      };
       this.controller.create(usuariofinal as User);
       this.router.navigate(['user-data']);
     }
