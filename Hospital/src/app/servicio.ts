@@ -1,14 +1,16 @@
 export interface Servicio {
     "ServiciosEnPromocions":Array<any>,
     "IDServicio": number,
-    "NombreServicio": string,
+    "Nombre": string,
     "Precio": number,
-    "Recomendaciones": string
+    "Recomendaciones": string,
+    "Contraindicaciones": string,
+    "Advertencias":string
 }
     
 export interface Promocion {
     "IDPromocion": number,
-    "NombrePromocion": string,
+    "Nombre": string,
     "Detalle": string,
     "FechaExpiracion": string
 }
@@ -24,7 +26,7 @@ export interface Paciente {
     "IDPaciente": number,
     "Nombre": string,
     "Apellido": string,
-    "Apellido2": string,
+    "SegundoApellido": string,
     "Identidad": string,
     "IDNacionalidad": number,
     "Edad": number,
@@ -35,9 +37,11 @@ export interface Paciente {
 }
 
 export interface User {
-    "IDUser": number,
+    //"Pacientes":Array<any>,
+    "IDUsers": number,
     "Correo": string,
     "Password": string,
+    "Cotizaciones":number,
     "Rol": number,
-    "Cotizaciones":number
+    "Estado": number
 }

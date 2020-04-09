@@ -25,22 +25,23 @@ export class LoginPage implements OnInit {
     this.router.navigate(['register']);
   }
   valid():boolean{
-    this.controller.getDetails(this.user.Correo).then((response)=>{
+    this.controller.getDetails(1).then((response)=>{
       this.temporal = response;
       var temp = "";
+      console.log(this.temporal.Correo);
       if(this.temporal){
         temp = this.temporal.Correo;
       }
-      if(temp != ""){
-        return true;
-      }else{
-        return false;
-      }
+      
     }, (error) => {
       console.log("Error: " + error.statusText);
       return false;
     });
-    return false;
+    if(this.temporal.Correo != ""){
+      return true;
+    }else{
+      return false;
+    }
   }
   valido(){
     if(this.valid()){

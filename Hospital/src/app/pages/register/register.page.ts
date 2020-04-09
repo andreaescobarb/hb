@@ -32,11 +32,12 @@ export class RegisterPage implements OnInit {
     this.getUsusario();
     if ((this.tempuser == undefined) || (this.tempuser.Correo != this.usuario.correo)){
       let usuariofinal = {
-        "IDUser": 0,
+        "IDUsers": 0,
         "Correo": this.usuario.correo,
         "Password": this.usuario.password,
+        "Cotizaciones": 1,
         "Rol": 0,
-        "Cotizaciones": 1
+        "Estado": 1
       };
       this.controller.create(usuariofinal as User);
       usermail = this.usuario.correo;

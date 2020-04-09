@@ -10,7 +10,7 @@
   <!-- Promo -->
   <ion-card mode="ios">
     <ion-card-header>
-      <ion-card-title text-wrap>{{promocion?.NombrePromocion}}</ion-card-title>
+      <ion-card-title text-wrap>{{promocion?.Nombre}}</ion-card-title>
       <ion-card-subtitle>{{promocion?.Detalle}}</ion-card-subtitle>
       <ion-label>Vence el: {{promocion?.FechaExpiracion}}</ion-label>
     </ion-card-header>
@@ -18,7 +18,7 @@
     <ion-card-content>
       <ion-list mode="ios" inset="true" lines="full">
         <ion-item *ngFor="let servicio of servicios">
-          <ion-label text-wrap>{{servicio?.NombreServicio}}</ion-label>
+          <ion-label text-wrap>{{servicio?.Nombre}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

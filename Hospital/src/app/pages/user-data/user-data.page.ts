@@ -14,7 +14,7 @@ export class UserDataPage implements OnInit {
     "IDPaciente": 0,
     "Nombre": "",
     "Apellido": "",
-    "Apellido2": "",
+    "SegundoApellido": "",
     "Identidad": "",
     "IDNacionalidad": 0,
     "Edad": 0,

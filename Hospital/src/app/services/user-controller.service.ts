@@ -6,7 +6,7 @@ import { User } from '../servicio';
   providedIn: 'root'
 })
 export class UserControllerService {
-  url = 'https://localhost:44380/api/Pacientes';
+  url = 'https://localhost:44380/api/Users';
   constructor(private http: HttpClient) { }
   create(user: User) {
     this.http.post(this.url, user);
