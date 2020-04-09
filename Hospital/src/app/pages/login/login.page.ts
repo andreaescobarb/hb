@@ -24,31 +24,20 @@ export class LoginPage implements OnInit {
   toRegister(){
     this.router.navigate(['register']);
   }
-  valid():boolean{
+  
+  valido(){
     this.controller.getDetails(1).then((response)=>{
       this.temporal = response;
-      var temp = "";
       console.log(this.temporal.Correo);
-      if(this.temporal){
-        temp = this.temporal.Correo;
+      if(this.temporal.Correo == this.user.Correo && this.temporal.Password == this.user.Password){
+        mail = this.user.Correo;
+        this.router.navigate(['menu','tabs']);
+      }else{
+        console.log('Correo o contraseña incorrectos');
       }
-      
     }, (error) => {
       console.log("Error: " + error.statusText);
-      return false;
     });
-    if(this.temporal.Correo != ""){
-      return true;
-    }else{
-      return false;
-    }
-  }
-  valido(){
-    if(this.valid()){
-      mail = this.user.Correo;
-      this.router.navigate(['menu','tabs']);
-    }else{
-      console.log('Ocurrio un Error')
-    }
   }
 }
+
