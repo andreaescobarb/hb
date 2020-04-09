@@ -29,29 +29,32 @@ export class RegisterPage implements OnInit {
 
   userData() {
     console.log(this.usuario.correo);
-    this.getUsusario();
-    if ((this.tempuser == undefined) || (this.tempuser.Correo != this.usuario.correo)){
-      let usuariofinal = {
-        "IDUsers": 0,
-        "Correo": this.usuario.correo,
-        "Password": this.usuario.password,
-        "Cotizaciones": 1,
-        "Rol": 0,
-        "Estado": 1
-      };
-      this.controller.create(usuariofinal as User);
-      usermail = this.usuario.correo;
-      this.router.navigate(['user-data']);
-    }
-  }
-
-  getUsusario() {
-    this.controller.getDetails(this.usuario.correo).then((response) => {
+    this.controller.getUsers().then((response) => {
       this.tempuser = response;
+      var flag = true;
+      for (let data of ((this.tempuser as unknown) as Iterable<User>)) {
+        if (data.Correo == this.usuario.correo) {
+          flag = false;
+        }
+      }
+      if(flag){
+        let usuariofinal = {
+          "IDUsers": 0,
+          "Correo": this.usuario.correo,
+          "Password": this.usuario.password,
+          "Cotizaciones": 1,
+          "Rol": 0,
+          "Estado": 1
+        };
+        this.controller.create(usuariofinal as User);
+        usermail = this.usuario.correo;
+        this.router.navigate(['user-data']);
+      }
     }, (error) => {
       console.log("Error: " + error.statusText);
     })
   }
+
   createSignupForm(): FormGroup {
     return this.fb.group(
       {

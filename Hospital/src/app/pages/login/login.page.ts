@@ -14,27 +14,28 @@ export var mail;
 export class LoginPage implements OnInit {
   url = "";
   user = {
-    "Correo":"",
-    "Password":"",
+    "Correo": "",
+    "Password": "",
   };
-  temporal:User;
-  constructor(private router:Router, private controller:UserControllerService, private http:HttpClient) { }
+  temporal: User;
+  constructor(private router: Router, private controller: UserControllerService, private http: HttpClient) { }
   ngOnInit() {
   }
-  toRegister(){
+  toRegister() {
     this.router.navigate(['register']);
   }
-  
-  valido(){
-    this.controller.getDetails(1).then((response)=>{
+
+  valido() {
+    this.controller.getUsers().then((response) => {
       this.temporal = response;
-      console.log(this.temporal.Correo);
-      if(this.temporal.Correo == this.user.Correo && this.temporal.Password == this.user.Password){
-        mail = this.user.Correo;
-        this.router.navigate(['menu','tabs']);
-      }else{
-        console.log('Correo o contraseña incorrectos');
+      var flag = true;
+      for (let data of ((this.temporal as unknown) as Iterable<User>)) {
+        if (data.Correo == this.user.Correo && data.Password == this.user.Password) {
+          mail = this.user.Correo;
+          this.router.navigate(['menu', 'tabs']);
+        }
       }
+      console.log('Correo o contraseña incorrectos');
     }, (error) => {
       console.log("Error: " + error.statusText);
     });

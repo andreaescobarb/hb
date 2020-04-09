@@ -11,6 +11,18 @@ export class UserControllerService {
   create(user: User) {
     this.http.post(this.url, user);
   }
+  getUsers(){
+    let promise = new Promise<User>((resolve, reject) => {
+      this.http.get(this.url)
+      .toPromise()
+      .then( (response) => {
+        resolve(response as User);
+      }, (error) => {
+        reject(error);
+      })
+  })
+  return promise;
+  }
   getDetails = (id): Promise<User> => {
     let urll = this.url + '/' + id;
     let promise = new Promise<User>((resolve, reject) => {
