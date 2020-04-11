@@ -9,6 +9,6 @@ export class PacientesControllerService {
   url = 'https://localhost:44380/api/Pacientes';
   constructor(private http:HttpClient) { }
   create(paciente:Paciente){
-    this.http.post(this.url,paciente);
+    this.http.post(this.url,JSON.stringify(paciente));
   }
 }
