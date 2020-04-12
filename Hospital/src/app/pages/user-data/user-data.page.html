@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref = "/register"></ion-back-button>
+      <ion-back-button defaultHref="/register"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Datos Personales
@@ -16,17 +16,17 @@
   <p></p>
   <ion-item>
     <ion-label position="floating">Primer Apellido</ion-label>
-    <ion-input type = "text" [(ngModel)]="paciente.Apellido"></ion-input>
+    <ion-input type="text" [(ngModel)]="paciente.Apellido"></ion-input>
   </ion-item>
   <p></p>
   <ion-item>
     <ion-label position="floating">Segundo Apellido</ion-label>
-    <ion-input type = "text" [(ngModel)]="paciente.Apellido2"></ion-input>
+    <ion-input type="text" [(ngModel)]="paciente.Apellido2"></ion-input>
   </ion-item>
   <p></p>
   <ion-item>
     <ion-label position="floating">Identidad</ion-label>
-    <ion-input type = "text" [(ngModel)]="paciente.Identidad"></ion-input>
+    <ion-input type="text" [(ngModel)]="paciente.Identidad"></ion-input>
   </ion-item>
   <p></p>
   <ion-item>
@@ -36,5 +36,31 @@
       <ion-select-option value="m">Masculino</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button shape="round" color = "primary" expand = "block" (click)="create()">Registrarse</ion-button>
+  <p></p>
+
+  <ion-item>
+    <ion-label>Nacionalidad</ion-label>
+    <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.Nacionalidad">
+      <ion-item *ngFor="let nacionalidad of Nacionalidades">
+        <ion-select-option value="nacionalidad.IDNacionalidad">{{nacionalidad.Nombre}}</ion-select-option>
+      </ion-item>
+    </ion-select>
+  </ion-item>
+  <p></p>
+
+  <ion-item>
+    <ion-label>Ciudad</ion-label>
+    <ion-select mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Ciudad" (change)="onChange()">
+      <ion-select-option *ngFor="let ciudad of Ciudades" value="ciudad.IDCiudad">{{ciudad.Nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <p></p>
+  <ion-item>
+    <ion-label>Residencia</ion-label>
+    <ion-select mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Residencia">
+      <ion-select-option *ngFor="let residencia of Residencias" value="ciudad.IDResidencia">{{residencia.Nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button shape="round" color="primary" expand="block" (click)="create()">Registrarse</ion-button>
 </ion-content>

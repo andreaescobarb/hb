@@ -44,3 +44,21 @@ export interface User {
     "Rol": number,
     "Estado": number
 }
+
+export interface Nacionalidad {
+    //"Pacientes":Array<any>,
+    "IDNacionalidad": number,
+    "Nombre":string
+}
+
+export interface Ciudad {
+    //"Pacientes":Array<any>,
+    "IDCiudad": number,
+    "Nombre":string
+}
+
+export interface Residencia {
+    "IDResidencia": number,
+    "Nombre": string,
+    "IDCiudad": number
+}
