@@ -12,7 +12,13 @@ export class UserControllerService {
   create(user) {
     const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
     console.log(JSON.stringify(user)); 
-    this.http.post(this.url,JSON.stringify(user),httpOptions);
+    this.http.post(this.url,JSON.stringify(user),httpOptions)
+    .toPromise()
+    .then( (response) => {
+      console.log(response)
+    }, (error)=> {
+      console.log(error.status)
+    });
   }
   getUsers(){
     let promise = new Promise<User>((resolve, reject) => {
