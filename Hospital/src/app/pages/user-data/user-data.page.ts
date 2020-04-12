@@ -11,7 +11,6 @@ import { usermail } from '../register/register.page';
 })
 export class UserDataPage implements OnInit {
   paciente = {
-    "IDPaciente": 0,
     "Nombre": "",
     "Apellido": "",
     "SegundoApellido": "",

@@ -23,7 +23,6 @@ export interface ServiciosEnPromocion {
 }
 
 export interface Paciente {
-    "IDPaciente": number,
     "Nombre": string,
     "Apellido": string,
     "SegundoApellido": string,
@@ -37,7 +36,6 @@ export interface Paciente {
 }
 
 export interface User {
-    //"Pacientes":Array<any>,
     "Correo": string,
     "Password": string,
     "Cotizaciones":number,
