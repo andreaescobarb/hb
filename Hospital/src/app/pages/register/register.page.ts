@@ -33,22 +33,26 @@ export class RegisterPage implements OnInit {
       this.tempuser = response;
       var flag = true;
       for (let data of ((this.tempuser as unknown) as Iterable<User>)) {
+        console.log(data.Correo);
         if (data.Correo == this.usuario.correo) {
           flag = false;
         }
       }
-      if(flag){
+      if (flag) {
+        console.log("LA CAGAMOS");
         let usuariofinal = {
-          "IDUsers": 0,
+          "IDUsers": null,
           "Correo": this.usuario.correo,
           "Password": this.usuario.password,
           "Cotizaciones": 1,
-          "Rol": 0,
+          "Rol": 3,
           "Estado": 1
         };
-        this.controller.create(usuariofinal as User);
+        this.controller.create(usuariofinal);
         usermail = this.usuario.correo;
         this.router.navigate(['user-data']);
+        console.log(usuariofinal);
+
       }
     }, (error) => {
       console.log("Error: " + error.statusText);

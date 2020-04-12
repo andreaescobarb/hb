@@ -28,12 +28,12 @@ export interface Paciente {
     "Apellido": string,
     "SegundoApellido": string,
     "Identidad": string,
-    "IDNacionalidad": number,
     "Edad": number,
     "Genero": string,
-    "CiudadResidencia": number,
+    "IDNacionalidad": number,
+    "Ciudad": number,
     "Residencia": number,
-    "IDUsers": string
+    "IDUser": string
 }
 
 export interface User {

@@ -15,12 +15,12 @@ export class InscribirOtroPage implements OnInit {
     "Apellido": "",
     "SegundoApellido": "",
     "Identidad": "",
-    "IDNacionalidad": 0,
     "Edad": 0,
     "Genero": "",
-    "CiudadResidencia": 0,
+    "IDNacionalidad": 0,
+    "Ciudad": 0,
     "Residencia": 0,
-    "IDUsers": ""
+    "IDUser": ""
   };
   constructor(private controller: PacientesControllerService) { }
 
@@ -30,7 +30,7 @@ export class InscribirOtroPage implements OnInit {
     if (this.paciente.Nombre!="" && this.paciente.Apellido!=""
     && this.paciente.Identidad!="" && this.paciente.Genero!=undefined
     && this.paciente.IDNacionalidad!=undefined) {
-      this.paciente.IDUsers = mail;
+      this.paciente.IDUser = mail;
       this.controller.create(this.paciente);
     }
   }

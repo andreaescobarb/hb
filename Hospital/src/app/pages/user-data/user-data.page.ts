@@ -16,12 +16,12 @@ export class UserDataPage implements OnInit {
     "Apellido": "",
     "SegundoApellido": "",
     "Identidad": "",
-    "IDNacionalidad": 0,
     "Edad": 0,
     "Genero": "",
-    "CiudadResidencia": 0,
+    "IDNacionalidad": 0,
+    "Ciudad": 0,
     "Residencia": 0,
-    "IDUsers": ""
+    "IDUser": ""
   };
   constructor(private controller: PacientesControllerService, private router:Router) { }
 
@@ -31,7 +31,7 @@ export class UserDataPage implements OnInit {
     if (this.paciente.Nombre!="" && this.paciente.Apellido!=""
     && this.paciente.Identidad!="" && this.paciente.Genero!=undefined
     && this.paciente.IDNacionalidad!=undefined) {
-      this.paciente.IDUsers = usermail;
+      this.paciente.IDUser = usermail;
       this.controller.create(this.paciente);
       this.router.navigate(['menu','tabs']);
     }
