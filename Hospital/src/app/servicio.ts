@@ -38,7 +38,6 @@ export interface Paciente {
 
 export interface User {
     //"Pacientes":Array<any>,
-    "IDUsers": number,
     "Correo": string,
     "Password": string,
     "Cotizaciones":number,

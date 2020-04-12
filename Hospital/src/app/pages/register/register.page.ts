@@ -41,7 +41,6 @@ export class RegisterPage implements OnInit {
       if (flag) {
         console.log("LA CAGAMOS");
         let usuariofinal = {
-          "IDUsers": null,
           "Correo": this.usuario.correo,
           "Password": this.usuario.password,
           "Cotizaciones": 1,
