@@ -51,8 +51,6 @@ export class RegisterPage implements OnInit {
         this.controller.create(usuariofinal);
         usermail = this.usuario.correo;
         this.router.navigate(['user-data']);
-        console.log(usuariofinal);
-
       }
     }, (error) => {
       console.log("Error: " + error.statusText);

@@ -10,8 +10,9 @@ export class UserControllerService {
   constructor(private http: HttpClient) { }
 
   create(user) {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    this.http.post(this.url,user,httpOptions);
+    const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
+    console.log(JSON.stringify(user)); 
+    this.http.post(this.url,JSON.stringify(user),httpOptions);
   }
   getUsers(){
     let promise = new Promise<User>((resolve, reject) => {
