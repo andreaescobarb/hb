@@ -50,7 +50,7 @@
 
   <ion-item>
     <ion-label>Ciudad</ion-label>
-    <ion-select multiple="false" mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Ciudad"
+    <ion-select mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Ciudad"
       (ionChange)="onChange()">
       <ion-select-option *ngFor="let ciudad of Ciudades" [value]="ciudad.IDCiudad">
         {{ciudad.Nombre}}
