@@ -11,30 +11,33 @@ import { Servicio } from '../../servicio';
 export class ServiciosPage implements OnInit {
   servicios: Array<Servicio>;
   details = "/menu/tabs/tabs/servicios/";
-  constructor(private controller: ServiciosControllerService, private router:Router) { }
-  ionViewWillEnter(){
+  constructor(private controller: ServiciosControllerService, private router: Router) { }
+  ionViewWillEnter() {
     this.getLstServicios();
   }
   ngOnInit() {
   }
-  filter(ev:any){
-    this.getLstServicios();
-    const val = ev.targert.value;
-    if(val && val.trim() != ''){
-      this.servicios = this.servicios.filter((item)=>{
-        return (item.Nombre.toLowerCase().indexOf(val.toLowecase())>-1);
-      });
+  filter(ev: any) {
+    if (this.servicios != undefined) {
+      const val = ev.targert.value;
+      if (val && val.trim() != '') {
+        this.servicios = this.servicios.filter((item) => {
+          return (item.Nombre.toLowerCase().indexOf(val.toLowecase()) > -1);
+        });
+      }
     }
   }
-  getLstServicios() {
-    this.controller.getServicios().then( (response) =>{
+  getLstServicios(): any {
+    this.controller.getServicios().then((response) => {
       this.servicios = response;
+      return true;
     }, (error) => {
       console.log("Error: " + error.statusText);
-    })
+      return false;
+    });
   }
   doRefresh(event) {
-    this.controller.getServicios().then( (response) =>{
+    this.controller.getServicios().then((response) => {
       this.servicios = response;
       event.target.complete();
     }, (error) => {
@@ -42,10 +45,10 @@ export class ServiciosPage implements OnInit {
       event.target.complete();
     });
   }
-  detail(id){
+  detail(id) {
     let ruta = this.details + id;
     this.router.navigateByUrl(ruta);
   }
-  
+
 }
 

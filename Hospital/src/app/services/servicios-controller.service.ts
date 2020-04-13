@@ -12,12 +12,12 @@ export class ServiciosControllerService {
 
   constructor(private http:HttpClient) { 
   }
-  getServicios = (): Promise<Servicio> => {
-    let promise = new Promise<Servicio>((resolve, reject) => {
+  getServicios = (): Promise<Array<Servicio>> => {
+    let promise = new Promise<Array<Servicio>>((resolve, reject) => {
         this.http.get(this.url)
         .toPromise()
         .then( (response) => {
-          resolve(response as Servicio);
+          resolve(response as Array<Servicio>);
         }, (error) => {
           reject(error);
         })
