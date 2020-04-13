@@ -41,24 +41,29 @@
   <ion-item>
     <ion-label>Nacionalidad</ion-label>
     <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.Nacionalidad">
-      <ion-item *ngFor="let nacionalidad of Nacionalidades">
-        <ion-select-option value="nacionalidad.IDNacionalidad">{{nacionalidad.Nombre}}</ion-select-option>
-      </ion-item>
+      <ion-select-option *ngFor="let nacionalidad of Nacionalidades" [value]="nacionalidad.IDNacionalidad">
+        {{nacionalidad.Nombre}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
   <p></p>
 
   <ion-item>
     <ion-label>Ciudad</ion-label>
-    <ion-select multiple="false" mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Ciudad" (change)="onChange()">
-      <ion-select-option *ngFor="let ciudad of Ciudades" value="ciudad.IDCiudad">{{ciudad.Nombre}}</ion-select-option>
+    <ion-select multiple="false" mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Ciudad"
+      (ionChange)="onChange()">
+      <ion-select-option *ngFor="let ciudad of Ciudades" [value]="ciudad.IDCiudad">
+        {{ciudad.Nombre}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
+
   <p></p>
   <ion-item>
     <ion-label>Residencia</ion-label>
     <ion-select mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Residencia">
-      <ion-select-option *ngFor="let residencia of Residencias" value="ciudad.IDResidencia">{{residencia.Nombre}}
+      <ion-select-option *ngFor="let residencia of Residencias" [value]="ciudad.IDResidencia">
+        {{residencia.Nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>
