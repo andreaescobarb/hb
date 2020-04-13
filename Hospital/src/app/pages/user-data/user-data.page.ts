@@ -14,7 +14,6 @@ export class UserDataPage implements OnInit {
   Ciudades: Ciudad;
   Residencias: Residencia;
   paciente = {
-    "IDPaciente": 0,
     "Nombre": "",
     "Apellido": "",
     "SegundoApellido": "",
