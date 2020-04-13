@@ -5,19 +5,35 @@
     </ion-buttons>
     <ion-title>Servicios</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content color="primary"
-      pullingIcon="lines"
-      refreshingSpinner="lines">
+    <ion-refresher-content color="primary" pullingIcon="lines" refreshingSpinner="lines">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar animated></ion-searchbar>
   <ion-list mode="ios" inset="true" lines="full">
     <ion-item button *ngFor="let servicio of servicios" (click)="detail(servicio.IDServicio)">
-      <ion-label text-wrap>{{servicio.Nombre}}</ion-label>
+      {{servicio.Nombre}}
     </ion-item>
   </ion-list>
 </ion-content>
+<script>
+  const searchbar = document.querySelector('ion-searchbar');
+  const items = Array.from(document.querySelector('ion-list').children);
+
+  searchbar.addEventListener('ionInput', handleInput);
+
+  function handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    requestAnimationFrame(() => {
+      items.forEach(item => {
+        const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+        item.style.display = shouldShow ? 'block' : 'none';
+      });
+    });
+  }
+</script>

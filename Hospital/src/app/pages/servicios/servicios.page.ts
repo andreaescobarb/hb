@@ -38,5 +38,6 @@ export class ServiciosPage implements OnInit {
     let ruta = this.details + id;
     this.router.navigateByUrl(ruta);
   }
+  
 }
 
