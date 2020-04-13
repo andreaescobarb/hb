@@ -27,11 +27,11 @@ export class UserDataPage implements OnInit {
   };
   constructor(private controller: PacientesControllerService, private router: Router) { }
   ionViewWillEnter() {
-  }
-  ngOnInit() {
     this.getLstNacionalidades();
     this.getLstCiudades();
-  //  this.getLstResidencias();
+    this.getLstResidencias(1);
+  }
+  ngOnInit() {
   }
 
   create() {
