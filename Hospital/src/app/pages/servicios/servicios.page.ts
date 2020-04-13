@@ -9,7 +9,7 @@ import { Servicio } from '../../servicio';
   styleUrls: ['./servicios.page.scss'],
 })
 export class ServiciosPage implements OnInit {
-  servicios: Servicio;
+  servicios: Array<Servicio>;
   details = "/menu/tabs/tabs/servicios/";
   constructor(private controller: ServiciosControllerService, private router:Router) { }
   ionViewWillEnter(){
@@ -17,7 +17,15 @@ export class ServiciosPage implements OnInit {
   }
   ngOnInit() {
   }
-
+  filter(ev:any){
+    this.getLstServicios();
+    const val = ev.targert.value;
+    if(val && val.trim() != ''){
+      this.servicios = this.servicios.filter((item)=>{
+        return (item.Nombre.toLowerCase().indexOf(val.toLowecase())>-1);
+      });
+    }
+  }
   getLstServicios() {
     this.controller.getServicios().then( (response) =>{
       this.servicios = response;
