@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   valido() {
-    this.router.navigate(['user-data']);
+    this.router.navigate(['menu', 'tabs']);
     this.controller.getUsers().then((response) => {
       this.temporal = response;
       var flag = true;
