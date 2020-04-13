@@ -62,7 +62,7 @@
   <ion-item>
     <ion-label>Residencia</ion-label>
     <ion-select mode="ios" placeholder="Seleccione una" [(ngModel)]="paciente.Residencia">
-      <ion-select-option *ngFor="let residencia of Residencias" [value]="ciudad.IDResidencia">
+      <ion-select-option *ngFor="let residencia of Residencias; let idx = index" selected = "{{(idx==0).toString()}}" [value]="residencia.IDResidencia">
         {{residencia.Nombre}}
       </ion-select-option>
     </ion-select>
