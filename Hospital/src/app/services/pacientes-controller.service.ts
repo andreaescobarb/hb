@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Paciente, Nacionalidad, Residencia, Ciudad } from '../servicio';
 
 @Injectable({
@@ -8,9 +8,17 @@ import { Paciente, Nacionalidad, Residencia, Ciudad } from '../servicio';
 export class PacientesControllerService {
   url = 'https://localhost:44380/api/Pacientes';
   constructor(private http: HttpClient) { }
-  create(paciente: Paciente) {
-    this.http.post(this.url, JSON.stringify(paciente));
-  };
+  create(paciente) {
+    const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
+    console.log(JSON.stringify(paciente)); 
+    this.http.post(this.url,JSON.stringify(paciente),httpOptions)
+    .toPromise()
+    .then( (response) => {
+      console.log(response)
+    }, (error)=> {
+      console.log(error.status)
+    });
+  }
 
   getNacionalidades = (): Promise<Nacionalidad> => {
     let promise = new Promise<Nacionalidad>((resolve, reject) => {

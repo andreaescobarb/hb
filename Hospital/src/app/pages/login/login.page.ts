@@ -26,7 +26,6 @@ export class LoginPage implements OnInit {
   }
 
   valido() {
-    this.router.navigate(['menu', 'tabs']);
     this.controller.getUsers().then((response) => {
       this.temporal = response;
       var flag = true;
@@ -36,7 +35,7 @@ export class LoginPage implements OnInit {
           this.router.navigate(['menu', 'tabs']);
         }
       }
-      console.log('Correo o contraseña incorrectos');
+      //console.log('Correo o contraseña incorrectos');
     }, (error) => {
       console.log("Error: " + error.statusText);
     });

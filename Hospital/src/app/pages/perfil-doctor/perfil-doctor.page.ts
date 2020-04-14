@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./perfil-doctor.page.scss'],
 })
 export class PerfilDoctorPage implements OnInit {
+  medicos:Array<Medico>;
   medico:Medico;
   id:string;
   constructor(private activatedRoute: ActivatedRoute, private controller:CitasControllerService) { }
@@ -19,8 +20,9 @@ export class PerfilDoctorPage implements OnInit {
   ngOnInit() {
   }
   getMedico() {
-    this.controller.getMedico(this.id).then( (response) =>{
-      this.medico = response;
+    this.controller.getMedicos(this.id).then( (response) =>{
+      this.medicos = response;
+      this.medico = this.medicos[0];
     }, (error) => {
       console.log("Error: " + error.statusText);
     })

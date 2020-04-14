@@ -1,5 +1,7 @@
+import { UserControllerService } from './../../services/user-controller.service';
+import { mail } from './../login/login.page';
 import { Router } from '@angular/router';
-import { Paciente, Nacionalidad, Residencia, Ciudad } from './../../servicio';
+import { Paciente, Nacionalidad, Residencia, Ciudad, User } from './../../servicio';
 import { PacientesControllerService } from './../../services/pacientes-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { usermail } from '../register/register.page';
@@ -13,6 +15,7 @@ export class UserDataPage implements OnInit {
   Nacionalidades: Nacionalidad;
   Ciudades: Ciudad;
   Residencias: Residencia;
+  temporal: User;
   paciente = {
     "Nombre": "",
     "Apellido": "",
@@ -25,7 +28,7 @@ export class UserDataPage implements OnInit {
     "Residencia": 0,
     "IDUser": ""
   };
-  constructor(private controller: PacientesControllerService, private router: Router) { }
+  constructor(private controller: PacientesControllerService, private router: Router, private controllerUser: UserControllerService) { }
   ionViewWillEnter() {
     this.getLstNacionalidades();
     this.getLstCiudades();
@@ -38,9 +41,21 @@ export class UserDataPage implements OnInit {
     if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
-      this.paciente.IDUser = usermail;
-      this.controller.create(this.paciente);
       this.router.navigate(['menu', 'tabs']);
+      this.controllerUser.getUsers().then((response) => {
+        this.temporal = response;
+        var flag = true;
+        for (let data of ((this.temporal as unknown) as Iterable<User>)) {
+          if (data.Correo == usermail) {
+            this.paciente.IDUser = data.Correo;
+            this.controller.create(this.paciente);
+            this.router.navigate(['menu', 'tabs']);
+          }
+        }
+        //console.log('Correo o contraseña incorrectos');
+      }, (error) => {
+        console.log("Error: " + error.statusText);
+      });
     }
   }
   getLstNacionalidades() {
