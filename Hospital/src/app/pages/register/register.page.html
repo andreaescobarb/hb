@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref = "/login"></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Registrarse
@@ -10,53 +10,34 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <form [formGroup]="frmSignup">
-    <ion-item> 
+    <ion-item>
       <ion-label position="floating">Correo</ion-label>
-      <ion-input 
-        type="Email" 
-        #email="ngModel"
-        [ngModelOptions]="{standalone: true}"
-        [class.is-invalid]="email.invalid && email.touched"
-        required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
-        class="form-control" 
-        name="Email" 
-        [(ngModel)] = "usuario.correo"
-      ></ion-input>
+      <ion-input type="Email" #email="ngModel" [ngModelOptions]="{standalone: true}"
+        [class.is-invalid]="email.invalid && email.touched" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        class="form-control" name="Email" [(ngModel)]="usuario.correo"></ion-input>
     </ion-item>
     <div *ngIf="email.errors && (email.invalid && email.touched)">
-        <small class="text-danger" *ngIf="email.errors.required">Porfavor ingrese su email</small>
-        <small class="text-danger" *ngIf="email.errors.pattern">Porfavor ingrese una direccion de correo válida</small>
-      </div>
+      <small class="text-danger" *ngIf="email.errors.required">Porfavor ingrese su email</small>
+      <small class="text-danger" *ngIf="email.errors.pattern">Porfavor ingrese una direccion de correo válida</small>
+    </div>
     <p></p>
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input 
-        id = "password"
-        type = "Password" 
-        class = "form-control"
-        formControlName="password"
-        [ngClass]="frmSignup.controls['password'].invalid ? 'is-invalid' : ''"
-        [(ngModel)] = "usuario.password"
-      ></ion-input>
+      <ion-input id="password" type="Password" class="form-control" formControlName="password"
+        [ngClass]="frmSignup.controls['password'].invalid ? 'is-invalid' : ''" [(ngModel)]="usuario.password">
+      </ion-input>
     </ion-item>
     <p></p>
     <ion-item>
       <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input
-        id = "confirmPassword" 
-        type = "Password"
-        class = "form-control"
-        formControlName="confirmPassword"
-        [ngClass]="frmSignup.controls['confirmPassword'].invalid ? 'is-invalid' : ''"
-        [(ngModel)]= "usuario.confirm"
-      ></ion-input>
+      <ion-input id="confirmPassword" type="Password" class="form-control" formControlName="confirmPassword"
+        [ngClass]="frmSignup.controls['confirmPassword'].invalid ? 'is-invalid' : ''" [(ngModel)]="usuario.confirm">
+      </ion-input>
     </ion-item>
-    <ion-button
-      [ngClass] = "(frmSignup.controls['password'].invalid || frmSignup.controls['confirmPassword'].invalid || email.invalid) ? 'button-disabled' : ''"
-      (click)="userData()"
-      shape="round" 
-      color = "primary" 
-      expand = "block"
-    >Continuar</ion-button>
   </form>
+  <ion-button
+      [ngClass]="(frmSignup.controls['password'].invalid || frmSignup.controls['confirmPassword'].invalid || email.invalid) ? 'button-disabled' : ''"
+      (click)="userData()" shape="round" color="primary" expand="block">
+      Continuar
+    </ion-button>
 </ion-content>

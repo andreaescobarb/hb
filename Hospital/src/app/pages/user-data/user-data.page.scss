@@ -22,10 +22,11 @@
     margin: 0;
   }
   ion-button{
+    margin-bottom: 5%;
+    margin-top: 5%;
     position:absolute; 
     left:5px; 
     right:5px;
-    bottom:5%;
   }
   ion-content ion-toolbar {
     --background: translucent;
