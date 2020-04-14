@@ -21,6 +21,14 @@ const routes: Routes = [
         loadChildren: () => import('../citas/citas.module').then(m => m.CitasPageModule)
       },
       {
+        path: 'citas/:id',
+        loadChildren: () => import('../citas-details/citas-details.module').then(m => m.CitasDetailsPageModule)
+      },
+      {
+        path: 'citas/:id/:doc',
+        loadChildren: () => import('../perfil-doctor/perfil-doctor.module').then(m => m.PerfilDoctorPageModule)
+      },
+      {
         path: 'promociones',
         loadChildren: () => import('../promociones/promociones.module').then(m => m.PromocionesPageModule)
       },

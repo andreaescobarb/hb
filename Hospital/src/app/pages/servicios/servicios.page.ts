@@ -35,10 +35,8 @@ export class ServiciosPage implements OnInit {
   getLstServicios(): any {
     this.controller.getServicios().then((response) => {
       this.servicios = response;
-      return true;
     }, (error) => {
       console.log("Error: " + error.statusText);
-      return false;
     });
   }
   doRefresh(event) {

@@ -15,6 +15,14 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'citas-details',
+    loadChildren: () => import('./pages/citas-details/citas-details.module').then( m => m.CitasDetailsPageModule)
+  },
+  {
+    path: 'perfil-doctor',
+    loadChildren: () => import('./pages/perfil-doctor/perfil-doctor.module').then( m => m.PerfilDoctorPageModule)
   }
   ];
 

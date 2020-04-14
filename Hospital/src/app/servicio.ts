@@ -1,13 +1,13 @@
 export interface Servicio {
-    "ServiciosEnPromocions":Array<any>,
+    "ServiciosEnPromocions": Array<any>,
     "IDServicio": number,
     "Nombre": string,
     "Precio": number,
     "Recomendaciones": string,
     "Contraindicaciones": string,
-    "Advertencias":string
+    "Advertencias": string
 }
-    
+
 export interface Promocion {
     "IDPromocion": number,
     "Nombre": string,
@@ -38,7 +38,7 @@ export interface Paciente {
 export interface User {
     "Correo": string,
     "Password": string,
-    "Cotizaciones":number,
+    "Cotizaciones": number,
     "Rol": number,
     "Estado": number
 }
@@ -46,17 +46,37 @@ export interface User {
 export interface Nacionalidad {
     //"Pacientes":Array<any>,
     "IDNacionalidad": number,
-    "Nombre":string
+    "Nombre": string
 }
 
 export interface Ciudad {
     //"Pacientes":Array<any>,
     "IDCiudad": number,
-    "Nombre":string
+    "Nombre": string
 }
 
 export interface Residencia {
     "IDResidencia": number,
     "Nombre": string,
     "IDCiudad": number
+}
+
+export interface Especialidad {
+    "IDEspecialidad": number,
+    "Nombre": string
+}
+
+export interface Medico {
+    "IDMedico": number,
+    "Nombre":string,
+    "Apellido":string,
+    "Titulo":string,
+    "Lunes":string,
+    "Martes":string,
+    "Miercoles":string,
+    "Jueves":string,
+    "Viernes":string,
+    "Sabado":string,
+    "Img": string,
+    "IDEspecialidad":number
 }
