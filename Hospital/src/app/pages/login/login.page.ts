@@ -35,7 +35,6 @@ export class LoginPage implements OnInit {
           this.router.navigate(['menu', 'tabs']);
         }
       }
-      //console.log('Correo o contraseña incorrectos');
     }, (error) => {
       console.log("Error: " + error.statusText);
     });

@@ -41,10 +41,10 @@ export class UserDataPage implements OnInit {
     if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
-      //this.router.navigate(['menu', 'tabs']);
       this.controllerUser.getUsuarios().then((response) => {
         this.temporal = response;
         var flag = true;
+        console.log(usermail);
         for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
           if (data.Correo == usermail) {
             this.paciente.IDUser = data.IDUser;
@@ -52,7 +52,6 @@ export class UserDataPage implements OnInit {
             this.router.navigate(['menu', 'tabs']);
           }
         }
-        //console.log('Correo o contraseña incorrectos');
       }, (error) => {
         console.log("Error: " + error.statusText);
       });
