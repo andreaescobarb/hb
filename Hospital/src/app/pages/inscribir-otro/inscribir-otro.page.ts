@@ -1,9 +1,9 @@
+import { mail } from './../login/login.page';
 import { Component, OnInit } from '@angular/core';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
-import { mail } from '../login/login.page';
 import { Router } from '@angular/router';
 import { usermail } from '../register/register.page';
-import { Nacionalidad, Ciudad, Residencia, User } from 'src/app/servicio';
+import { Nacionalidad, Ciudad, Residencia, User, Usuario } from 'src/app/servicio';
 import { UserControllerService } from 'src/app/services/user-controller.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class InscribirOtroPage implements OnInit {
   Nacionalidades: Nacionalidad;
   Ciudades: Ciudad;
   Residencias: Residencia;
-  temporal:User;
+  temporal:Usuario;
   paciente = {
     "Nombre": "",
     "Apellido": "",
@@ -26,7 +26,7 @@ export class InscribirOtroPage implements OnInit {
     "IDNacionalidad": 0,
     "Ciudad": 0,
     "Residencia": 0,
-    "IDUser": ""
+    "IDUser": 0
   };
   constructor(private controller: PacientesControllerService, private router: Router, private controllerUser: UserControllerService) { }
   ionViewWillEnter() {
@@ -40,13 +40,13 @@ export class InscribirOtroPage implements OnInit {
     if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
-      this.router.navigate(['menu', 'tabs']);
-      this.controllerUser.getUsers().then((response) => {
+      //this.router.navigate(['menu', 'tabs']);
+      this.controllerUser.getUsuarios().then((response) => {
         this.temporal = response;
         var flag = true;
-        for (let data of ((this.temporal as unknown) as Iterable<User>)) {
-          if (data.Correo == usermail) {
-            this.paciente.IDUser = data.Correo;
+        for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
+          if (data.Correo == usermail || data.Correo == mail) {
+            this.paciente.IDUser = data.IDUser;
             this.controller.create(this.paciente);
             this.router.navigate(['menu', 'tabs']);
           }
