@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { UserControllerService } from './../../services/user-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/servicio';
 
 export var mail;

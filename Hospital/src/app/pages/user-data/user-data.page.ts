@@ -33,6 +33,7 @@ export class UserDataPage implements OnInit {
     this.getLstNacionalidades();
     this.getLstCiudades();
     this.getLstResidencias(1);
+    console.log(usermail);
   }
   ngOnInit() {
   }
