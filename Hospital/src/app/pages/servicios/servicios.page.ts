@@ -18,14 +18,19 @@ export class ServiciosPage implements OnInit {
   ngOnInit() {
   }
   filter(ev: any) {
-    if (this.servicios != undefined) {
-      const val = ev.targert.value;
-      if (val && val.trim() != '') {
-        this.servicios = this.servicios.filter((item) => {
-          return (item.Nombre.toLowerCase().indexOf(val.toLowecase()) > -1);
-        });
+    this.controller.getServicios().then((response) => {
+      this.servicios = response;
+      if (this.servicios != undefined) {
+        const val : string = ev.target.value;
+        if (val && val.trim() != '') {
+          this.servicios = this.servicios.filter((item) => {
+            return (item.Nombre.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          });
+        }
       }
-    }
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    });
   }
   getLstServicios(): any {
     this.controller.getServicios().then((response) => {
