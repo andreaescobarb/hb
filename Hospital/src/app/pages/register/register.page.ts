@@ -12,7 +12,7 @@ export var usermail;
 })
 export class RegisterPage implements OnInit {
 
-  private usuario = {
+  usuario = {
     'correo': "",
     'password': "",
     'confirm': ""
