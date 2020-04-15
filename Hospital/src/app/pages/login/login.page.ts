@@ -97,7 +97,7 @@ export class LoginPage implements OnInit {
         },
         error => {
           this.loading = false;
-          console.log(error);
+          console.log(error.statusText);
         }
       )
     /*
