@@ -23,7 +23,7 @@ export class UserDataPage implements OnInit {
     "Identidad": "",
     "Edad": 0,
     "Genero": "",
-    "IDNacionalidad": 0,
+    "IDNacionalidad": 1,
     "Ciudad": 0,
     "Residencia": 0,
     "IDUser": 0
@@ -48,7 +48,7 @@ export class UserDataPage implements OnInit {
         console.log(usermail);
         for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
           if (data.Correo == usermail) {
-            this.paciente.IDUser = data.IDUser;
+            this.paciente.IDUser = data.IDUsers;
             this.controller.create(this.paciente);
             this.router.navigate(['menu', 'tabs']);
           }

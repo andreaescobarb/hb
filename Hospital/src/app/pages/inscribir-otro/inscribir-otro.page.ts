@@ -46,7 +46,7 @@ export class InscribirOtroPage implements OnInit {
         var flag = true;
         for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
           if (data.Correo == usermail || data.Correo == mail) {
-            this.paciente.IDUser = data.IDUser;
+            this.paciente.IDUser = data.IDUsers;
             this.controller.create(this.paciente);
             this.router.navigate(['menu', 'tabs']);
           }

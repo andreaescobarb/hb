@@ -40,7 +40,7 @@
 
   <ion-item>
     <ion-label>Nacionalidad</ion-label>
-    <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.Nacionalidad" [value]="paciente?.Nacionalidad">
+    <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.IDNacionalidad">
       <ion-select-option *ngFor="let nacionalidad of Nacionalidades" [value]="nacionalidad.IDNacionalidad">
         {{nacionalidad.Nombre}}
       </ion-select-option>

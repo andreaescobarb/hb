@@ -44,7 +44,7 @@ export interface User {
 }
 
 export interface Usuario {
-    "IDUser": number,
+    "IDUsers": number,
     "Correo": string,
     "Password": string,
     "Cotizaciones": number,
