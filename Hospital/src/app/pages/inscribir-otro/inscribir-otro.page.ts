@@ -1,6 +1,10 @@
+import { mail } from './../login/login.page';
 import { Component, OnInit } from '@angular/core';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
-import { mail } from '../login/login.page';
+import { Router } from '@angular/router';
+import { usermail } from '../register/register.page';
+import { Nacionalidad, Ciudad, Residencia, User, Usuario } from 'src/app/servicio';
+import { UserControllerService } from 'src/app/services/user-controller.service';
 
 @Component({
   selector: 'app-inscribir-otro',
@@ -8,9 +12,11 @@ import { mail } from '../login/login.page';
   styleUrls: ['./inscribir-otro.page.scss'],
 })
 export class InscribirOtroPage implements OnInit {
-
+  Nacionalidades: Nacionalidad;
+  Ciudades: Ciudad;
+  Residencias: Residencia;
+  temporal:Usuario;
   paciente = {
-    "IDPaciente": 0,
     "Nombre": "",
     "Apellido": "",
     "SegundoApellido": "",
@@ -20,19 +26,60 @@ export class InscribirOtroPage implements OnInit {
     "IDNacionalidad": 0,
     "Ciudad": 0,
     "Residencia": 0,
-    "IDUser": ""
+    "IDUser": 0
   };
-  constructor(private controller: PacientesControllerService) { }
-
+  constructor(private controller: PacientesControllerService, private router: Router, private controllerUser: UserControllerService) { }
+  ionViewWillEnter() {
+    this.getLstNacionalidades();
+    this.getLstCiudades();
+    this.getLstResidencias(1);
+  }
   ngOnInit() {
   }
   create() {
-    if (this.paciente.Nombre!="" && this.paciente.Apellido!=""
-    && this.paciente.Identidad!="" && this.paciente.Genero!=undefined
-    && this.paciente.IDNacionalidad!=undefined) {
-      this.paciente.IDUser = mail;
-      this.controller.create(this.paciente);
+    if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
+      && this.paciente.Identidad != "" && this.paciente.Genero != undefined
+      && this.paciente.IDNacionalidad != undefined) {
+      //this.router.navigate(['menu', 'tabs']);
+      this.controllerUser.getUsuarios().then((response) => {
+        this.temporal = response;
+        var flag = true;
+        for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
+          if (data.Correo == usermail || data.Correo == mail) {
+            this.paciente.IDUser = data.IDUsers;
+            this.controller.create(this.paciente);
+            this.router.navigate(['menu', 'tabs']);
+          }
+        }
+        //console.log('Correo o contraseña incorrectos');
+      }, (error) => {
+        console.log("Error: " + error.statusText);
+      });
     }
+  }
+  getLstNacionalidades() {
+    this.controller.getNacionalidades().then((response) => {
+      this.Nacionalidades = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  getLstCiudades() {
+    this.controller.getCiudades().then((response) => {
+      this.Ciudades = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  getLstResidencias(id) {
+    this.controller.getResidencias(id).then((response) => {
+      this.Residencias = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  onChange() {
+    this.getLstResidencias(this.paciente.Ciudad);
   }
 
 }

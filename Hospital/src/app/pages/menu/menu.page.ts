@@ -13,7 +13,7 @@ export class MenuPage implements OnInit {
       url: '/menu/tabs'
     },
     {
-      title: 'Cuenta',
+      title: 'Citas Programadas',
       url: '/menu/cuenta'
     },
     {

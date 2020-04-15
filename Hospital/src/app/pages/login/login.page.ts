@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CustomValidators } from 'src/app/custom-validators';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { first } from 'rxjs/operators';
+//import { User } from 'src/app/servicio';
 
 export var mail;
 @Component({
@@ -101,6 +102,7 @@ export class LoginPage implements OnInit {
       )
     /*
     this.router.navigate(['menu', 'tabs']);
+  valido() {
     this.controller.getUsers().then((response) => {
       this.temporal = response;
       for (let data of ((this.temporal as unknown) as Iterable<User>)) {
@@ -109,7 +111,6 @@ export class LoginPage implements OnInit {
           this.router.navigate(['menu', 'tabs']);
         }
       }
-      console.log('Correo o contraseña incorrectos');
     }, (error) => {
       console.log("Error: " + error.statusText);
     });

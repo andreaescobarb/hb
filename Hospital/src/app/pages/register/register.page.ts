@@ -28,7 +28,6 @@ export class RegisterPage implements OnInit {
   }
 
   userData() {
-    this.router.navigate(['user-data']);
     console.log(this.usuario.correo);
     this.controller.getUsers().then((response) => {
       this.tempuser = response;

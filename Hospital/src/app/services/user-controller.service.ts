@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../servicio';
+import { User, Usuario } from '../servicio';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,18 @@ export class UserControllerService {
       .toPromise()
       .then( (response) => {
         resolve(response as User);
+      }, (error) => {
+        reject(error);
+      })
+  })
+  return promise;
+  }
+  getUsuarios(){
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.http.get(this.url)
+      .toPromise()
+      .then( (response) => {
+        resolve(response as Usuario);
       }, (error) => {
         reject(error);
       })

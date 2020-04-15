@@ -32,10 +32,19 @@ export interface Paciente {
     "IDNacionalidad": number,
     "Ciudad": number,
     "Residencia": number,
-    "IDUser": string
+    "IDUser": number
 }
 
 export interface User {
+    "Correo": string,
+    "Password": string,
+    "Cotizaciones": number,
+    "Rol": number,
+    "Estado": number
+}
+
+export interface Usuario {
+    "IDUsers": number,
     "Correo": string,
     "Password": string,
     "Cotizaciones": number,
@@ -68,15 +77,15 @@ export interface Especialidad {
 
 export interface Medico {
     "IDMedico": number,
-    "Nombre":string,
-    "Apellido":string,
-    "Titulo":string,
-    "Lunes":string,
-    "Martes":string,
-    "Miercoles":string,
-    "Jueves":string,
-    "Viernes":string,
-    "Sabado":string,
+    "Nombre": string,
+    "Apellido": string,
+    "Titulo": string,
+    "Lunes": string,
+    "Martes": string,
+    "Miercoles": string,
+    "Jueves": string,
+    "Viernes": string,
+    "Sabado": string,
     "Img": string,
-    "IDEspecialidad":number
+    "IDEspecialidad": number
 }
