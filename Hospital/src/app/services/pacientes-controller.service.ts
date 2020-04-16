@@ -20,6 +20,19 @@ export class PacientesControllerService {
     });
   }
 
+  getPacientes = (id): Promise<Array<Paciente>> => {
+    let promise = new Promise<Array<Paciente>>((resolve, reject) => {
+      this.http.get('https://localhost:44380/api/Pacientes/'+id)
+        .toPromise()
+        .then((response) => {
+          resolve(response as Array<Paciente>);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
+  }
+
   getNacionalidades = (): Promise<Nacionalidad> => {
     let promise = new Promise<Nacionalidad>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/Nacionalidades')

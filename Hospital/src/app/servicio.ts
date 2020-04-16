@@ -90,3 +90,9 @@ export interface Medico {
     "IDEspecialidad": number,
     "IDUser": number
 }
+
+export interface Cita{
+    "Fecha":string,
+    "Hora":string,
+    "IDMedico":number
+}

@@ -16,15 +16,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'menu', canActivate: [AuthGuard],
+    path: 'menu', //canActivate: [AuthGuard],
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
   {
-    path: 'citas-details', canActivate: [AuthGuard],
+    path: 'citas-details', //canActivate: [AuthGuard],
     loadChildren: () => import('./pages/citas-details/citas-details.module').then( m => m.CitasDetailsPageModule)
   },
   {
-    path: 'perfil-doctor', canActivate: [AuthGuard],
+    path: 'perfil-doctor', //canActivate: [AuthGuard],
     loadChildren: () => import('./pages/perfil-doctor/perfil-doctor.module').then( m => m.PerfilDoctorPageModule)
   }
   ];

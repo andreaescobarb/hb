@@ -1,5 +1,6 @@
+import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
 import { Component, OnInit } from '@angular/core';
-import { Medico } from 'src/app/servicio';
+import { Medico, Cita, Paciente } from 'src/app/servicio';
 import { CitasControllerService } from 'src/app/services/citas-controller.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,15 +10,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./perfil-doctor.page.scss'],
 })
 export class PerfilDoctorPage implements OnInit {
+  //Medico
+  id: string;//Id Medico
   medicos: Array<Medico>;
   medico: Medico;
-  id: string;
-  date: Date = new Date();
-  date0: Date = new Date();
+  citas:Array<Cita>;
+  //DateTime Fecha
+  date: Date;
+  date0: Date;
   minDate: string = "";
   maxDate: string = "";
-  n_disponibles:string = '';
-  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService) { }
+  //DateTime Horas
+  deshabilitar: boolean = true;
+  n_disponibles: Array<string> = [];//Horas no disponibles para tal fecha
+  fecha: string;
+  fecha_cita: Date;
+  hora_start: string;
+  hora_finish: string;
+  hora_cita: string;
+  //Cita
+  pacientes:Array<Paciente>;
+  IDPaciente:number;
+
+  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService) { }
   ionViewWillEnter() {
     this.id = this.activatedRoute.snapshot.paramMap.get('doc');
     this.date = new Date();
@@ -35,8 +50,9 @@ export class PerfilDoctorPage implements OnInit {
     } else {
       this.maxDate += this.date0.getFullYear() + "-" + (this.date0.getMonth() + 1) + "-" + this.date0.getDate();
     }
-
     this.getMedico();
+    this.getCitas();
+    this.getPacientes();
   }
   ngOnInit() {
   }
@@ -48,7 +64,117 @@ export class PerfilDoctorPage implements OnInit {
       console.log("Error: " + error.statusText);
     })
   }
+  getCitas() {
+    this.controller.getCitas(("-"+this.id)).then((response) => {
+      this.citas = response;
+      for (let cita of this.citas){
+        this.n_disponibles.push(cita.Hora);
+      }
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  getPacientes(){
+    this.controlador.getPacientes("-"+"id").then((response) => {
+      this.pacientes = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
 
-  horas(){}
+  horas() {
+    this.fecha_cita = new Date(this.fecha.substr(0, 10));
+    console.log((this.fecha_cita.getDate() + 1).toString());
+    switch (this.fecha_cita.getDay() + 1) {
+      case 1:
+        this.deshabilitar = false;
+        if (this.medico.Lunes != "") {
+          console.log('Lunes');
+          this.hora_start = (this.medico.Lunes as string).substr(0, 5);
+          this.hora_finish = (this.medico.Lunes as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      case 2:
+        this.deshabilitar = false;
+        if (this.medico.Martes != "") {
+          console.log('Martes');
+          this.hora_start = (this.medico.Martes as string).substr(0, 5);
+          this.hora_finish = (this.medico.Martes as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      case 3:
+        this.deshabilitar = false;
+        if (this.medico.Miercoles != "") {
+          console.log('Miercoles');
+          this.hora_start = (this.medico.Miercoles as string).substr(0, 5);
+          this.hora_finish = (this.medico.Miercoles as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      case 4:
+        this.deshabilitar = false;
+        if (this.medico.Jueves != "") {
+          console.log('Jueves');
+          this.hora_start = (this.medico.Jueves as string).substr(0, 5);
+          this.hora_finish = (this.medico.Jueves as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      case 5:
+        this.deshabilitar = false;
+        if (this.medico.Viernes != "") {
+          console.log('Viernes');
+          this.hora_start = (this.medico.Viernes as string).substr(0, 5);
+          this.hora_finish = (this.medico.Viernes as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      case 6:
+        this.deshabilitar = false;
+        if (this.medico.Sabado != "") {
+          console.log('Sabado');
+          this.hora_start = (this.medico.Sabado as string).substr(0, 5);
+          this.hora_finish = (this.medico.Sabado as string).substr(6, 5);
+          break;
+        } else {
+          this.deshabilitar = true;
+        }
+      default:
+        this.deshabilitar = true;
+    }
+  }
+  ordenLlegada(){
+    //crearCita
+    let cita = {
+      "Fecha": this.fecha_cita,
+      "Hora":"",
+      "IDMedico": this.medico.IDMedico,
+      "IDPaciente": this.IDPaciente 
+    }
+    this.controller.create(cita);
+  }
+  agendar(){
+    this.hora_cita = this.hora_cita.substr(11,5);
+    console.log(this.hora_cita)
+    if(!this.n_disponibles.indexOf(this.hora_cita)){
+      //Crear Cita
+      let cita = {
+        "Fecha": this.fecha_cita,
+        "Hora": this.hora_cita,
+        "IDMedico": this.medico.IDMedico,
+        "IDPaciente": this.IDPaciente
+      }
+      this.controller.create(cita);
+    }else{
+      //Hora No Disponible
+    }
+  }
 
 }

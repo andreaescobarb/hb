@@ -1,11 +1,12 @@
-import { Especialidad, Medico } from './../servicio';
+import { Especialidad, Medico, Cita } from './../servicio';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CitasControllerService {
+  //Especialidades
   url = 'https://localhost:44380/api/especialidades';
   constructor(private http: HttpClient) { }
   getEspecialidades = (): Promise<Array<Especialidad>> => {
@@ -33,6 +34,8 @@ export class CitasControllerService {
     })
     return promise;
   }
+
+  //Medicos
   getMedicos = (id): Promise<Array<Medico>> => {
     let promise = new Promise<Array<Medico>>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/medicos/' + id)
@@ -56,5 +59,31 @@ export class CitasControllerService {
         })
     })
     return promise;
+  }
+
+  //Citas
+  getCitas = (id): Promise<Array<Cita>> => {
+    let promise = new Promise<Array<Cita>>((resolve, reject) => {
+      this.http.get('https://localhost:44380/api/citas/' + id)
+        .toPromise()
+        .then((response) => {
+          resolve(response as Array<Cita>);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
+  }
+
+  create(cita) {
+    const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
+    console.log(JSON.stringify(cita)); 
+    this.http.post('https://localhost:44380/api/citas',JSON.stringify(cita),httpOptions)
+    .toPromise()
+    .then( (response) => {
+      console.log(response)
+    }, (error)=> {
+      console.log(error.status)
+    });
   }
 }
