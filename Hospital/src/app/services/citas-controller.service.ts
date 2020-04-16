@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CitasControllerService {
+  //Especialidades
   url = 'https://localhost:44380/api/especialidades';
   constructor(private http: HttpClient) { }
   getEspecialidades = (): Promise<Array<Especialidad>> => {
@@ -20,6 +21,7 @@ export class CitasControllerService {
     })
     return promise;
   }
+  //Determinada Especialidad
   getDetails = (id): Promise<Especialidad> => {
     let urll = this.url + '/' + id;
     let promise = new Promise<Especialidad>((resolve, reject) => {
@@ -34,7 +36,7 @@ export class CitasControllerService {
     return promise;
   }
 
-  //Medicos
+  //Medicos de Determinada Especialidad
   getMedicos = (id): Promise<Array<Medico>> => {
     let promise = new Promise<Array<Medico>>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/especialidades/' + id)
@@ -47,6 +49,7 @@ export class CitasControllerService {
     })
     return promise;
   }
+  //Médico Específico
   getMedico = (id): Promise<Array<Medico>> => {
     let promise = new Promise<Array<Medico>>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/medicos/' + id)
@@ -61,7 +64,7 @@ export class CitasControllerService {
   }
  
 
-  //Citas
+  //Citas de un Médico Específico
   getCitas = (id): Promise<Array<Cita>> => {
     let promise = new Promise<Array<Cita>>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/medicos/' + id)
@@ -74,7 +77,20 @@ export class CitasControllerService {
     })
     return promise;
   }
-
+  //Citas de Determinado Paciente
+  getCitasU = (id): Promise<Array<Cita>> => {
+    let promise = new Promise<Array<Cita>>((resolve, reject) => {
+      this.http.get('https://localhost:44380/api/citas/' + id)
+        .toPromise()
+        .then((response) => {
+          resolve(response as Array<Cita>);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
+  }
+  //Hacer una Cita
   create(cita) {
     const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
     console.log(JSON.stringify(cita)); 

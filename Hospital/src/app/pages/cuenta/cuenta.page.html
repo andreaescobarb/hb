@@ -5,8 +5,19 @@
     </ion-buttons>
     <ion-title>Citas Programadas</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated (ionInput)="filter($event)" placeholder="Buscar"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content color="primary" pullingIcon="lines" refreshingSpinner="lines">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list mode="ios" inset="true" lines="full">
+    <ion-item button *ngFor="let paciente of pacientes" (click)="detail(paciente.IDPaciente)">
+      {{paciente.Nombre}} {{paciente.Apellido}} {{paciente.SegundoApellido}}
+    </ion-item>
+  </ion-list>
 </ion-content>

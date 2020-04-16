@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'perfil-doctor', //canActivate: [AuthGuard],
     loadChildren: () => import('./pages/perfil-doctor/perfil-doctor.module').then( m => m.PerfilDoctorPageModule)
+  },  {
+    path: 'mis-citas',
+    loadChildren: () => import('./pages/mis-citas/mis-citas.module').then( m => m.MisCitasPageModule)
   }
+
   ];
 
 @NgModule({

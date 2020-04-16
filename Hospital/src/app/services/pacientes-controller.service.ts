@@ -1,3 +1,4 @@
+import { Pacientes } from './../servicio';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Paciente, Nacionalidad, Residencia, Ciudad } from '../servicio';
@@ -26,6 +27,19 @@ export class PacientesControllerService {
         .toPromise()
         .then((response) => {
           resolve(response as Array<Paciente>);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
+  }
+
+  getPacientesU = (id): Promise<Array<Pacientes>> => {
+    let promise = new Promise<Array<Pacientes>>((resolve, reject) => {
+      this.http.get('https://localhost:44380/api/Pacientes/'+id)
+        .toPromise()
+        .then((response) => {
+          resolve(response as Array<Pacientes>);
         }, (error) => {
           reject(error);
         })
