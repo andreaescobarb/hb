@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CitasPage implements OnInit {
   especialidades:Array<Especialidad>;
-  details = "/menu/tabs/tabs/especialidades/";
+  details = "/menu/tabs/tabs/citas/";
   constructor(private controller: CitasControllerService, private router: Router) { }
   ionViewWillEnter() {
     this.getLstEspecialidades();

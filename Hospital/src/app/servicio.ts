@@ -79,13 +79,14 @@ export interface Medico {
     "IDMedico": number,
     "Nombre": string,
     "Apellido": string,
-    "Titulo": string,
     "Lunes": string,
     "Martes": string,
     "Miercoles": string,
     "Jueves": string,
     "Viernes": string,
     "Sabado": string,
+    "Titulos": string,
     "Img": string,
-    "IDEspecialidad": number
+    "IDEspecialidad": number,
+    "IDUser": number
 }

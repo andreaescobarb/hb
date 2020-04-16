@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CitasControllerService {
-  url = 'https://localhost:44380//api/especialidades';
+  url = 'https://localhost:44380/api/especialidades';
   constructor(private http: HttpClient) { }
   getEspecialidades = (): Promise<Array<Especialidad>> => {
     let promise = new Promise<Array<Especialidad>>((resolve, reject) => {
@@ -35,7 +35,7 @@ export class CitasControllerService {
   }
   getMedicos = (id): Promise<Array<Medico>> => {
     let promise = new Promise<Array<Medico>>((resolve, reject) => {
-      this.http.get('https://localhost:44380//api/medicos/' + id)
+      this.http.get('https://localhost:44380/api/medicos/' + id)
         .toPromise()
         .then((response) => {
           resolve(response as Array<Medico>);
@@ -47,7 +47,7 @@ export class CitasControllerService {
   }
   getMedico = (id): Promise<Medico> => {
     let promise = new Promise<Medico>((resolve, reject) => {
-      this.http.get('https://localhost:44380//api/medicos/' + id)
+      this.http.get('https://localhost:44380/api/medicos/' + id)
         .toPromise()
         .then((response) => {
           resolve(response as Medico);
