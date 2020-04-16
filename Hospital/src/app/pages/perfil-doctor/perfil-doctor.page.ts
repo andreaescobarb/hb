@@ -14,7 +14,7 @@ export class PerfilDoctorPage implements OnInit {
   id: string;//Id Medico
   medicos: Array<Medico>;
   medico: Medico;
-  citas:Array<Cita>;
+  citas: Array<Cita>;
   //DateTime Fecha
   date: Date;
   date0: Date;
@@ -29,8 +29,8 @@ export class PerfilDoctorPage implements OnInit {
   hora_finish: string;
   hora_cita: string;
   //Cita
-  pacientes:Array<Paciente>;
-  IDPaciente:number;
+  pacientes: Array<Paciente>;
+  IDPaciente: number;
 
   constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService) { }
   ionViewWillEnter() {
@@ -65,17 +65,23 @@ export class PerfilDoctorPage implements OnInit {
     })
   }
   getCitas() {
-    this.controller.getCitas(("-"+this.id)).then((response) => {
+    this.controller.getCitas(("-" + this.id)).then((response) => {
       this.citas = response;
-      for (let cita of this.citas){
-        this.n_disponibles.push(cita.Hora);
+      for (let cita of this.citas) {
+        if (this.fecha != "") {
+          if(cita.Fecha == this.fecha){
+            this.n_disponibles.push(cita.Hora);
+          }
+        }else{
+          this.n_disponibles.push(cita.Hora);
+        }
       }
     }, (error) => {
       console.log("Error: " + error.statusText);
     })
   }
-  getPacientes(){
-    this.controlador.getPacientes("-"+"id").then((response) => {
+  getPacientes() {
+    this.controlador.getPacientes("-" + "id").then((response) => {
       this.pacientes = response;
     }, (error) => {
       console.log("Error: " + error.statusText);
@@ -83,6 +89,7 @@ export class PerfilDoctorPage implements OnInit {
   }
 
   horas() {
+    this.getCitas();
     this.fecha_cita = new Date(this.fecha.substr(0, 10));
     console.log((this.fecha_cita.getDate() + 1).toString());
     switch (this.fecha_cita.getDay() + 1) {
@@ -150,20 +157,20 @@ export class PerfilDoctorPage implements OnInit {
         this.deshabilitar = true;
     }
   }
-  ordenLlegada(){
+  ordenLlegada() {
     //crearCita
     let cita = {
       "Fecha": this.fecha_cita,
-      "Hora":"",
+      "Hora": "",
       "IDMedico": this.medico.IDMedico,
-      "IDPaciente": this.IDPaciente 
+      "IDPaciente": this.IDPaciente
     }
     this.controller.create(cita);
   }
-  agendar(){
-    this.hora_cita = this.hora_cita.substr(11,5);
+  agendar() {
+    this.hora_cita = this.hora_cita.substr(11, 5);
     console.log(this.hora_cita)
-    if(!this.n_disponibles.indexOf(this.hora_cita)){
+    if (!this.n_disponibles.indexOf(this.hora_cita)) {
       //Crear Cita
       let cita = {
         "Fecha": this.fecha_cita,
@@ -172,7 +179,7 @@ export class PerfilDoctorPage implements OnInit {
         "IDPaciente": this.IDPaciente
       }
       this.controller.create(cita);
-    }else{
+    } else {
       //Hora No Disponible
     }
   }
