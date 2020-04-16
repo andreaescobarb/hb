@@ -93,6 +93,8 @@ export interface Medico {
 
 export interface Cita{
     "Fecha":string,
+    "Estado": number,
     "Hora":string,
-    "IDMedico":number
+    "IDMedico":number,
+    "IDPaciente": number
 }

@@ -57,7 +57,7 @@ export class PerfilDoctorPage implements OnInit {
   ngOnInit() {
   }
   getMedico() {
-    this.controller.getMedicos(this.id).then((response) => {
+    this.controller.getMedico(this.id).then((response) => {
       this.medicos = response;
       this.medico = this.medicos[0];
     }, (error) => {
@@ -98,7 +98,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Lunes != "") {
           console.log('Lunes');
           this.hora_start = (this.medico.Lunes as string).substr(0, 5);
-          this.hora_finish = (this.medico.Lunes as string).substr(6, 5);
+          this.hora_finish = (this.medico.Lunes as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -108,7 +108,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Martes != "") {
           console.log('Martes');
           this.hora_start = (this.medico.Martes as string).substr(0, 5);
-          this.hora_finish = (this.medico.Martes as string).substr(6, 5);
+          this.hora_finish = (this.medico.Martes as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -118,7 +118,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Miercoles != "") {
           console.log('Miercoles');
           this.hora_start = (this.medico.Miercoles as string).substr(0, 5);
-          this.hora_finish = (this.medico.Miercoles as string).substr(6, 5);
+          this.hora_finish = (this.medico.Miercoles as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -128,7 +128,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Jueves != "") {
           console.log('Jueves');
           this.hora_start = (this.medico.Jueves as string).substr(0, 5);
-          this.hora_finish = (this.medico.Jueves as string).substr(6, 5);
+          this.hora_finish = (this.medico.Jueves as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -138,7 +138,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Viernes != "") {
           console.log('Viernes');
           this.hora_start = (this.medico.Viernes as string).substr(0, 5);
-          this.hora_finish = (this.medico.Viernes as string).substr(6, 5);
+          this.hora_finish = (this.medico.Viernes as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -148,7 +148,7 @@ export class PerfilDoctorPage implements OnInit {
         if (this.medico.Sabado != "") {
           console.log('Sabado');
           this.hora_start = (this.medico.Sabado as string).substr(0, 5);
-          this.hora_finish = (this.medico.Sabado as string).substr(6, 5);
+          this.hora_finish = (this.medico.Sabado as string).substr(8, 5);
           break;
         } else {
           this.deshabilitar = true;
@@ -156,11 +156,13 @@ export class PerfilDoctorPage implements OnInit {
       default:
         this.deshabilitar = true;
     }
+    console.log(this.hora_start + " " + this.hora_finish);
   }
   ordenLlegada() {
     //crearCita
     let cita = {
       "Fecha": this.fecha_cita,
+      "Estado": 1,
       "Hora": "",
       "IDMedico": this.medico.IDMedico,
       "IDPaciente": this.IDPaciente
@@ -174,6 +176,7 @@ export class PerfilDoctorPage implements OnInit {
       //Crear Cita
       let cita = {
         "Fecha": this.fecha_cita,
+        "Estado": 1,
         "Hora": this.hora_cita,
         "IDMedico": this.medico.IDMedico,
         "IDPaciente": this.IDPaciente

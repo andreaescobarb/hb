@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CitasControllerService {
-  //Especialidades
   url = 'https://localhost:44380/api/especialidades';
   constructor(private http: HttpClient) { }
   getEspecialidades = (): Promise<Array<Especialidad>> => {
@@ -38,6 +37,18 @@ export class CitasControllerService {
   //Medicos
   getMedicos = (id): Promise<Array<Medico>> => {
     let promise = new Promise<Array<Medico>>((resolve, reject) => {
+      this.http.get('https://localhost:44380/api/especialidades/' + id)
+        .toPromise()
+        .then((response) => {
+          resolve(response as Array<Medico>);
+        }, (error) => {
+          reject(error);
+        })
+    })
+    return promise;
+  }
+  getMedico = (id): Promise<Array<Medico>> => {
+    let promise = new Promise<Array<Medico>>((resolve, reject) => {
       this.http.get('https://localhost:44380/api/medicos/' + id)
         .toPromise()
         .then((response) => {
@@ -48,23 +59,12 @@ export class CitasControllerService {
     })
     return promise;
   }
-  getMedico = (id): Promise<Medico> => {
-    let promise = new Promise<Medico>((resolve, reject) => {
-      this.http.get('https://localhost:44380/api/medicos/' + id)
-        .toPromise()
-        .then((response) => {
-          resolve(response as Medico);
-        }, (error) => {
-          reject(error);
-        })
-    })
-    return promise;
-  }
+ 
 
   //Citas
   getCitas = (id): Promise<Array<Cita>> => {
     let promise = new Promise<Array<Cita>>((resolve, reject) => {
-      this.http.get('https://localhost:44380/api/citas/' + id)
+      this.http.get('https://localhost:44380/api/medicos/' + id)
         .toPromise()
         .then((response) => {
           resolve(response as Array<Cita>);
