@@ -21,6 +21,30 @@
   
     margin: 0;
   }
+
+  small {
+    display: inline-block;
+    transition: width 2s;
+  }
+
+  .correct {
+    margin-top: 0px;
+    margin-left: 15px;
+    color: rgb(23, 206, 17);
+  }
+
+  .incorrect {
+    margin-top: 0px;
+    margin-left: 15px;
+    color: rgb(255, 6, 6);
+  }
+
+  ion-item{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
   ion-button{
     position:absolute; 
     left:5px; 

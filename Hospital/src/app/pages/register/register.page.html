@@ -11,33 +11,93 @@
 <ion-content [fullscreen]="true" >
   <form [formGroup]="frmSignup">
     <ion-item>
-      <ion-label position="floating">Correo</ion-label>
-      <ion-input type="Email" #email="ngModel" [ngModelOptions]="{standalone: true}"
-        [class.is-invalid]="email.invalid && email.touched" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-        class="form-control" name="Email" [(ngModel)]="usuario.correo"></ion-input>
+      <ion-label position="floating">
+        <ion-icon name="mail-outline"></ion-icon>
+        Correo
+      </ion-label>
+      <ion-input 
+        type="Email"
+        formControlName="correo" 
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && controls.correo.errors}"
+        ></ion-input>
     </ion-item>
-    <div *ngIf="email.errors && (email.invalid && email.touched)">
-      <small class="text-danger" *ngIf="email.errors.required">Porfavor ingrese su email</small>
-      <small class="text-danger" *ngIf="email.errors.pattern">Porfavor ingrese una direccion de correo válida</small>
+    <div 
+      *ngIf="controls.correo.errors && submitted" 
+      [@inOutAnimation]>
+      <small
+        class="incorrect" 
+        *ngIf="!controls.correo.errors.patternValidator"
+        >Ingrese una dirección de correo válida</small>
     </div>
     <p></p>
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input id="password" type="Password" class="form-control" formControlName="password"
-        [ngClass]="frmSignup.controls['password'].invalid ? 'is-invalid' : ''" [(ngModel)]="usuario.password">
+      <ion-label position="floating">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        Contraseña
+      </ion-label>
+      <ion-input  
+        type="Password"
+        class="form-control" 
+        formControlName="password"
+        [ngClass]="{ 'is-invalid': submitted && controls.password.errors}">
       </ion-input>
     </ion-item>
+    <div
+      *ngIf="controls.password.errors" 
+      [@inOutAnimation]>
+      <ion-icon *ngIf="(!controls.password.errors.hasNumber && !controls.password.errors.required)" name="checkmark-sharp" class="correct"></ion-icon>
+      <ion-icon *ngIf="(controls.password.errors.hasNumber || controls.password.errors.required)" name="close-sharp" class="incorrect"></ion-icon>
+      <small
+        [ngClass]="((controls.password.errors && controls.password.errors.hasNumber) || controls.password.errors.required) ? 'incorrect' : 'correct'"
+        >Debe contener un número
+      </small>
+      <p></p>
+      <ion-icon *ngIf="(!controls.password.errors.hasCapitalCase && !controls.password.errors.required)" name="checkmark-sharp" class="correct"></ion-icon>
+      <ion-icon *ngIf="(controls.password.errors.hasCapitalCase || controls.password.errors.required)" name="close-sharp" class="incorrect"></ion-icon>
+      <small 
+        [ngClass]="(controls.password.errors.hasCapitalCase || controls.password.errors.required) ? 'incorrect' : 'correct'"
+        >Debe contener una mayúscula
+      </small>
+      <p></p>
+      <ion-icon *ngIf="(!controls.password.errors.hasSmallCase && !controls.password.errors.required)" name="checkmark-sharp" class="correct"></ion-icon>
+      <ion-icon *ngIf="(controls.password.errors.hasSmallCase || controls.password.errors.required)" name="close-sharp" class="incorrect"></ion-icon>
+      <small 
+        [ngClass]="(controls.password.errors.hasSmallCase || controls.password.errors.required) ? 'incorrect' : 'correct'"
+        >Debe contener una minúscula
+      </small>
+      <p></p>
+      <ion-icon *ngIf="(controls.password.value.length >= 8 && !controls.password.errors.required)" name="checkmark-sharp" class="correct"></ion-icon>
+      <ion-icon *ngIf="(controls.password.value.length < 8 || controls.password.errors.required)" name="close-sharp" class="incorrect"></ion-icon>
+      <small 
+        [ngClass]="(controls.password.value.length < 8 || controls.password.errors.required) ? 'incorrect' : 'correct'"
+        >Debe contener mínimo 8 caracteres
+      </small>
+    </div>
     <p></p>
     <ion-item>
-      <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input id="confirmPassword" type="Password" class="form-control" formControlName="confirmPassword"
-        [ngClass]="frmSignup.controls['confirmPassword'].invalid ? 'is-invalid' : ''" [(ngModel)]="usuario.confirm">
+      <ion-label position="floating">
+        <ion-icon name="checkbox-outline"></ion-icon>
+        Confirmar Contraseña
+      </ion-label>
+      <ion-input 
+        type="Password" 
+        class="form-control" 
+        formControlName="confirmPassword"
+        [ngClass]="{ 'is-invalid': submitted && controls.confirmPassword.errors}">
       </ion-input>
     </ion-item>
+    <div 
+      class="incorrect"
+      *ngIf="controls.confirmPassword.errors && submitted"
+      [@inOutAnimation]>
+      <small 
+        *ngIf="controls.confirmPassword.errors"
+        >Las contraseñas no concuerdan</small>
+    </div>
   </form>
-  <ion-button
-      [ngClass]="(frmSignup.controls['password'].invalid || frmSignup.controls['confirmPassword'].invalid || email.invalid) ? 'button-disabled' : ''"
-      (click)="userData()" shape="round" color="primary" expand="block">
+    <ion-button
+      [disabled]="loading" (click)="registrarUsuario()" shape="round" color="primary" expand="block">
       Continuar
     </ion-button>
 </ion-content>
