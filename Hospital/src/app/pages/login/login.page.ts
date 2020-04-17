@@ -5,6 +5,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CustomValidators } from 'src/app/custom-validators';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { first } from 'rxjs/operators';
+import { JwtHelper } from '../../helpers/jwthelper'
+import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/models/users';
 //import { User } from 'src/app/servicio';
 
 export var mail;
@@ -50,9 +53,11 @@ export class LoginPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router, 
     //private controller: UserControllerService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private jwtHelper: JwtHelper
     ) { 
-      if(this.authenticationService.currentUser){
+      console.log(this.authenticationService.isAuthenticated )
+      if((this.authenticationService.currentUser.source as BehaviorSubject<User>).value ){
         this.router.navigate(['menu', 'tabs']);
       }
     }
@@ -92,6 +97,7 @@ export class LoginPage implements OnInit {
         data => {
           this.router.navigate([this.returnUrl]);
           console.log(data);
+          console.log(this.jwtHelper.decodeToken(data.access_token));
         },
         error => {
           this.loading = false;

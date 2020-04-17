@@ -35,4 +35,8 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    isAuthenticated():any{
+        return (this.currentUser.source as BehaviorSubject<User>).value
+    }
 }
