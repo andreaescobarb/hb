@@ -1,5 +1,3 @@
-//import { User } from './../../servicio';
-import { UserControllerService } from './../../services/user-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ControlContainer } from '@angular/forms';
@@ -8,7 +6,6 @@ import { User } from '../../models/users'
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RegisterService } from 'src/app/services/register.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-export var usermail;
 
 @Component({
   selector: 'app-register',
@@ -47,7 +44,6 @@ export class RegisterPage implements OnInit {
   loading = false;
 
   constructor(
-    //private controller: UserControllerService, 
     private router: Router, 
     private fb: FormBuilder,
     private registerService: RegisterService,

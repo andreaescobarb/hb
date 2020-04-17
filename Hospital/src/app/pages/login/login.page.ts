@@ -8,9 +8,7 @@ import { first } from 'rxjs/operators';
 import { JwtHelper } from '../../helpers/jwthelper'
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/users';
-//import { User } from 'src/app/servicio';
 
-export var mail;
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -52,7 +50,6 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router, 
-    //private controller: UserControllerService,
     private authenticationService: AuthenticationService,
     private jwtHelper: JwtHelper
     ) { 
