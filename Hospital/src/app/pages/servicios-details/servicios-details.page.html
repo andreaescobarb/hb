@@ -11,6 +11,11 @@
     <ion-card-header>
       <ion-card-title text-wrap>{{servicio?.Nombre}}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>Recomendaciones: {{servicio?.Recomendaciones}} <br/> Contraindicaciones: {{servicio?.Contraindicaciones}} <br/> Advertencias: {{servicio?.Advertencias}}</ion-card-content>
+    <ion-card-content>
+      Recomendaciones: {{servicio?.Recomendaciones}} <br/> 
+      Contraindicaciones: {{servicio?.Contraindicaciones}} <br/> 
+      Advertencias: {{servicio?.Advertencias}} <br/>
+      <ion-button (click)="presentAlert()">Cotizar Precio</ion-button>
+    </ion-card-content>
   </ion-card>
 </ion-content>

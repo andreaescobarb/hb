@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Promocion, ServiciosEnPromocion, Servicio } from './../../servicio';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +16,7 @@ export class PromocionesDetailsPage implements OnInit {
   servicios: Array<Servicio> = new Array<Servicio>();
   id: string;
   Ahorro: number = 0;
-  constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService) { }
+  constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService, private alertController:AlertController) { }
   ionViewWillEnter(){
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.Ahorro = 0;
@@ -23,6 +24,20 @@ export class PromocionesDetailsPage implements OnInit {
     this.getPromocion();
   }
   ngOnInit() {
+  }
+  async presentAlert() {
+    var precio:number = 0.0;
+    /*for(let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)){
+      precio += data.PrecioFinal;
+    }*/
+    const alert = await this.alertController.create({
+      header: 'this.promocion.Nombre',
+      subHeader: 'Precio: ',
+      message: precio + ' lps.',
+      buttons: ['Cerrar']
+    });
+    await alert.present();
+    //user cotizaciones += 1
   }
   getPromocion() {
     this.controller.getDetails(this.id).then((response) => {
