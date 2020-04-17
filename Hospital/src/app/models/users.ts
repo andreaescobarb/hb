@@ -6,11 +6,11 @@ export interface UserI{
     "Estado": number
 }
 
-export class User implements UserI{
-    id: number;
+export class User{
     Username: string;
     Email: string;
     Password: string;
+    ConfirmPassword: string;
     Cotizaciones: number;
     Rol: number;
     Estado: number;

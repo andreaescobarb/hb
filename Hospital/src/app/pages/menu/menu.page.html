@@ -8,16 +8,19 @@
       </ion-toolbar>
         <ion-content [fullscreen] = "true" scroll-y="false">
           <ion-list>
-            <ion-menu-button auto-hide="false" *ngFor="let p of pages">
+            <ion-menu-button auto-hide="false" *ngFor="let p of pages" text-right>
               <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)">
                 <ion-label>
+                  <ion-icon [name]="p.icon" item-left></ion-icon>
                   {{p.title}}
                 </ion-label>
               </ion-item>
             </ion-menu-button>
-            <ion-menu-button auto-hide="false" routerLink="/login" routerDirection="root">
-              <ion-icon name="log-out" slot="start"></ion-icon>
-              Cerrar Sesión
+            <ion-menu-button ion-item auto-hide="false" (click)="logout()">
+              <ion-label>
+                <ion-icon name="log-out-outline" item-left></ion-icon>
+                Cerrar Sesión
+              </ion-label>
             </ion-menu-button>
           </ion-list>
         </ion-content>

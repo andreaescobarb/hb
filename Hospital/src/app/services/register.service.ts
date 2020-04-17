@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/users';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class RegisterService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
@@ -20,19 +20,12 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'}) };
-        return this.http.post<any>(`${environment.apiUrl}oauth/token`, `username=${username}&password=${password}&grant_type=password`, httpOptions)
-            .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                console.log(JSON.stringify(user))
-                this.currentUserSubject.next(user);
+    registrar(user) {
+        const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
+        return this.http.post<any>(`${environment.apiUrl}api/accounts/create`,JSON.stringify(user),httpOptions)
+            .pipe(map(user=>{
+                console.log(JSON.stringify(user));
                 return user;
             }));
-    }
-
-    logout() {
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
     }
 }

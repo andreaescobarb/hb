@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { UserControllerService } from './../../services/user-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { User } from '../../models/users';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CustomValidators } from 'src/app/custom-validators';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -23,7 +20,7 @@ export var mail;
           ':enter', 
           [
             style({height: 0, opacity: 0 }),
-            animate('1s ease-out', 
+            animate('0.7s ease-out', 
                     style({height: '*', opacity: 1 }))
           ]
         ),
@@ -39,9 +36,10 @@ export var mail;
     )
   ]
 })
+
 export class LoginPage implements OnInit {
-  url = "";
-  temporal: User;
+  
+  //url = "";
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -71,7 +69,7 @@ export class LoginPage implements OnInit {
       ]
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || ['menu', 'tabs'];
   }
 
   get controls(){ return this.loginForm.controls; }
