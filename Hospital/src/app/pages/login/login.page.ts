@@ -98,9 +98,9 @@ export class LoginPage implements OnInit {
           console.log(error.statusText);
         }
       )
-    /*
-    this.router.navigate(['menu', 'tabs']);
-  valido() {
+    
+    //this.router.navigate(['menu', 'tabs']);
+  /*valido() {
     this.controller.getUsers().then((response) => {
       this.temporal = response;
       for (let data of ((this.temporal as unknown) as Iterable<User>)) {

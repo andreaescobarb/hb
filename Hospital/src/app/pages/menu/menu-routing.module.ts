@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('../cuenta/cuenta.module').then(m => m.CuentaPageModule)
       },
       {
+        path: 'cuenta/:id',
+        loadChildren: () => import('../mis-citas/mis-citas.module').then(m => m.MisCitasPageModule)
+      },
+      {
         path: 'inscribir-otro',
         loadChildren: () => import('../inscribir-otro/inscribir-otro.module').then(m => m.InscribirOtroPageModule)
       }
