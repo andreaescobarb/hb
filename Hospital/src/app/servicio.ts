@@ -32,7 +32,7 @@ export interface Paciente {
     "IDNacionalidad": number,
     "Ciudad": number,
     "Residencia": number,
-    "IDUser": number
+    "IDUser": string
 }
 
 export interface Pacientes {
@@ -46,7 +46,7 @@ export interface Pacientes {
     "IDNacionalidad": number,
     "Ciudad": number,
     "Residencia": number,
-    "IDUser": number
+    "IDUser": string
 }
 
 export interface User {
@@ -58,7 +58,7 @@ export interface User {
 }
 
 export interface Usuario {
-    "IDUsers": number,
+    "IDUsers": string,
     "Correo": string,
     "Password": string,
     "Cotizaciones": number,
@@ -102,7 +102,7 @@ export interface Medico {
     "Titulos": string,
     "Img": string,
     "IDEspecialidad": number,
-    "IDUser": number
+    "IDUser": string
 }
 
 export interface Cita{
