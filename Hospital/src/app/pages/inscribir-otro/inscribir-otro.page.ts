@@ -24,7 +24,7 @@ export class InscribirOtroPage implements OnInit {
     "IDNacionalidad": 0,
     "Ciudad": 0,
     "Residencia": 0,
-    "IDUser": 0
+    "IDUser": ""
   };
   constructor(private controller: PacientesControllerService, private router: Router, private usuario: JwtHelper) { }
   ionViewWillEnter() {

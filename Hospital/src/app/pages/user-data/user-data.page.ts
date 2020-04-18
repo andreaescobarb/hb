@@ -24,7 +24,7 @@ export class UserDataPage implements OnInit {
     "IDNacionalidad": 1,
     "Ciudad": 0,
     "Residencia": 0,
-    "IDUser": 0
+    "IDUser": ""
   };
   constructor(private controller: PacientesControllerService, private router: Router, private usuario:JwtHelper) { }
   ionViewWillEnter() {
