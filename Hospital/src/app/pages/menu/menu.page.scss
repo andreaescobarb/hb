@@ -1,3 +1,17 @@
 .active-item{
     border-left: 3px solid var(--ion-color-primary);
 }
+
+small{
+    font-size: 13px;
+}
+
+.menu_footer{
+    left:0;
+    right:0;
+    margin:0;
+    padding-left: 16px;
+    width: 100%;
+    position: fixed;
+    bottom:8px;
+}

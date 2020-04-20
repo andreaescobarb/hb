@@ -98,6 +98,7 @@ export class LoginPage implements OnInit {
           this.router.navigate([this.returnUrl]);
           console.log(data);
           console.log(this.jwtHelper.decodeToken(data.access_token));
+          console.log((this.authenticationService.currentUserValue as any).access_token)
         },
         error => {
           this.loading = false;

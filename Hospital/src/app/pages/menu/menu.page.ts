@@ -1,6 +1,9 @@
 import { Router, RouterEvent } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { JwtHelper } from 'src/app/helpers/jwthelper';
+import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/models/users';
 
 @Component({
   selector: 'app-menu',
@@ -25,16 +28,22 @@ export class MenuPage implements OnInit {
       icon: 'add-sharp'
     }
   ];
+  userEmail: string;
   selectedPath = '';
   constructor(
     private router : Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private jwtHelper: JwtHelper
     ) {
     this.router.events.subscribe((event:RouterEvent) => {
       if(event && event.url){
         this.selectedPath = event.url;
       }
     });
+    var decodedToken = jwtHelper.decodeToken(
+      (this.authenticationService.currentUserValue as any).access_token
+    ); 
+    this.userEmail = decodedToken.unique_name;
   }
 
   ngOnInit() {
