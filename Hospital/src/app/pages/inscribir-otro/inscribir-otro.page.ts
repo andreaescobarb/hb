@@ -1,10 +1,8 @@
-import { mail } from './../login/login.page';
+import { JwtHelper } from './../../helpers/jwthelper';
 import { Component, OnInit } from '@angular/core';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
 import { Router } from '@angular/router';
-import { usermail } from '../register/register.page';
 import { Nacionalidad, Ciudad, Residencia, User, Usuario } from 'src/app/servicio';
-import { UserControllerService } from 'src/app/services/user-controller.service';
 
 @Component({
   selector: 'app-inscribir-otro',
@@ -15,7 +13,7 @@ export class InscribirOtroPage implements OnInit {
   Nacionalidades: Nacionalidad;
   Ciudades: Ciudad;
   Residencias: Residencia;
-  temporal:Usuario;
+  temporal: Usuario;
   paciente = {
     "Nombre": "",
     "Apellido": "",
@@ -26,9 +24,9 @@ export class InscribirOtroPage implements OnInit {
     "IDNacionalidad": 0,
     "Ciudad": 0,
     "Residencia": 0,
-    "IDUser": 0
+    "IDUser": ""
   };
-  constructor(private controller: PacientesControllerService, private router: Router, private controllerUser: UserControllerService) { }
+  constructor(private controller: PacientesControllerService, private router: Router, private usuario: JwtHelper) { }
   ionViewWillEnter() {
     this.getLstNacionalidades();
     this.getLstCiudades();
@@ -36,25 +34,15 @@ export class InscribirOtroPage implements OnInit {
   }
   ngOnInit() {
   }
+  //Este
   create() {
     if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
       //this.router.navigate(['menu', 'tabs']);
-      this.controllerUser.getUsuarios().then((response) => {
-        this.temporal = response;
-        var flag = true;
-        for (let data of ((this.temporal as unknown) as Iterable<Usuario>)) {
-          if (data.Correo == usermail || data.Correo == mail) {
-            this.paciente.IDUser = data.IDUsers;
-            this.controller.create(this.paciente);
-            this.router.navigate(['menu', 'tabs']);
-          }
-        }
-        //console.log('Correo o contraseña incorrectos');
-      }, (error) => {
-        console.log("Error: " + error.statusText);
-      });
+      this.paciente.IDUser = this.usuario.decodeToken(localStorage.getItem('currentUser')).nameid;
+      this.controller.create(this.paciente);
+      this.router.navigate(['menu', 'tabs']);
     }
   }
   getLstNacionalidades() {

@@ -1,3 +1,4 @@
+import { JwtHelper } from './../../helpers/jwthelper';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { Medico, Cita, Paciente } from 'src/app/servicio';
@@ -32,7 +33,7 @@ export class PerfilDoctorPage implements OnInit {
   pacientes: Array<Paciente>;
   IDPaciente: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService) { }
+  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService, private usuario:JwtHelper) { }
   ionViewWillEnter() {
     this.id = this.activatedRoute.snapshot.paramMap.get('doc');
     this.date = new Date();
@@ -64,6 +65,7 @@ export class PerfilDoctorPage implements OnInit {
       console.log("Error: " + error.statusText);
     })
   }
+
   getCitas() {
     this.controller.getCitas(("-" + this.id)).then((response) => {
       this.citas = response;
@@ -80,8 +82,9 @@ export class PerfilDoctorPage implements OnInit {
       console.log("Error: " + error.statusText);
     })
   }
+
   getPacientes() {
-    this.controlador.getPacientes("-" + "id").then((response) => {
+    this.controlador.getPacientes(this.usuario.decodeToken(localStorage.getItem('currentuser')).nameid).then((response) => {
       this.pacientes = response;
     }, (error) => {
       console.log("Error: " + error.statusText);
