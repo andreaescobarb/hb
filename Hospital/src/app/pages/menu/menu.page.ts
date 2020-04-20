@@ -26,6 +26,11 @@ export class MenuPage implements OnInit {
       title: 'Inscribir',
       url: '/menu/inscribir-otro',
       icon: 'add-sharp'
+    },
+    {
+      title: 'Ver Carrito',
+      url: '/menu/carrito',
+      icon: 'cart-outline'
     }
   ];
   userEmail: string;

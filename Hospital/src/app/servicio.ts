@@ -8,6 +8,25 @@ export interface Servicio {
     "Advertencias": string
 }
 
+export interface ServicioP{
+    "IDServicio":number,
+    "Nombre":string,
+    "PrecioU":number,
+    "Cantidad":number,
+    "PrecioT":number
+}
+
+export interface PromocionP{
+    "IDPromocion":number,
+    "Nombre":string,
+    "Detalle":string,
+    "Servicios":Array<ServiciosEnPromocion>,
+    "FechaExpiracion":string,
+    "Cantidad":number,
+    "PrecioU": number,
+    "PrecioT":number
+}
+
 export interface Promocion {
     "IDPromocion": number,
     "Nombre": string,

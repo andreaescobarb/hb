@@ -1,5 +1,6 @@
+import { CartService } from './../../services/cart.service';
 import { AlertController } from '@ionic/angular';
-import { Promocion, ServiciosEnPromocion, Servicio } from './../../servicio';
+import { Promocion, ServiciosEnPromocion, Servicio, PromocionP } from './../../servicio';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PromocionesControllerService } from 'src/app/services/promociones-controller.service';
@@ -16,7 +17,7 @@ export class PromocionesDetailsPage implements OnInit {
   servicios: Array<Servicio> = new Array<Servicio>();
   id: string;
   Ahorro: number = 0;
-  constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService, private alertController:AlertController) { }
+  constructor(private activatedRoute: ActivatedRoute, private controller: PromocionesControllerService, private controlador: ServiciosControllerService, private alertController:AlertController, private cartS:CartService) { }
   ionViewWillEnter(){
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.Ahorro = 0;
@@ -27,13 +28,13 @@ export class PromocionesDetailsPage implements OnInit {
   }
   async presentAlert() {
     var precio:number = 0.0;
-    /*for(let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)){
+    for(let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)){
       precio += data.PrecioFinal;
-    }*/
+    }
     const alert = await this.alertController.create({
       header: 'this.promocion.Nombre',
       subHeader: 'Precio: ',
-      message: precio + ' lps.',
+      message: precio + ' lps.' + 'Ahorro: ' + this.Ahorro + ' lps.',
       buttons: ['Cerrar']
     });
     await alert.present();
@@ -72,6 +73,24 @@ export class PromocionesDetailsPage implements OnInit {
     for (let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)) {
       this.Ahorro -= data.PrecioFinal;
     }
+  }
+
+  add(){
+    var precio:number = 0.0;
+    for(let data of ((this.paquete as unknown) as Iterable<ServiciosEnPromocion>)){
+      precio += data.PrecioFinal;
+    }
+    let producto:PromocionP = {
+      "IDPromocion":this.promocion.IDPromocion,
+      "Nombre":this.promocion.Nombre,
+      "Detalle":this.promocion.Detalle,
+      "Servicios": ((this.paquete as unknown) as Array<ServiciosEnPromocion>),
+      "FechaExpiracion":this.promocion.FechaExpiracion,
+      "Cantidad": 1,
+      "PrecioU": precio,
+      "PrecioT": precio 
+    }
+    this.cartS.addProduct(producto);
   }
 
 }

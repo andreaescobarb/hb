@@ -29,6 +29,10 @@ const routes: Routes = [
   },  {
     path: 'mis-citas',
     loadChildren: () => import('./pages/mis-citas/mis-citas.module').then( m => m.MisCitasPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
   }
 
   ];

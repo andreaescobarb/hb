@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'inscribir-otro',
         loadChildren: () => import('../inscribir-otro/inscribir-otro.module').then(m => m.InscribirOtroPageModule)
+      },
+      {
+        path: 'carrito',
+        loadChildren: () => import('../carrito/carrito.module').then(m => m.CarritoPageModule)
       }
     ]
   }
