@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medico, Cita, Paciente } from 'src/app/servicio';
 import { CitasControllerService } from 'src/app/services/citas-controller.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-perfil-doctor',
@@ -33,7 +34,7 @@ export class PerfilDoctorPage implements OnInit {
   pacientes: Array<Paciente>;
   IDPaciente: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService, private usuario:JwtHelper) { }
+  constructor(private activatedRoute: ActivatedRoute, private controller: CitasControllerService, private controlador: PacientesControllerService, private usuario:AuthenticationService, private jwt:JwtHelper) { }
   ionViewWillEnter() {
     this.id = this.activatedRoute.snapshot.paramMap.get('doc');
     this.date = new Date();
@@ -84,8 +85,9 @@ export class PerfilDoctorPage implements OnInit {
   }
 
   getPacientes() {
-    this.controlador.getPacientes(this.usuario.decodeToken(localStorage.getItem('currentuser')).nameid).then((response) => {
+    this.controlador.getPacientesU("-" + (this.jwt.decodeToken((this.usuario.currentUserValue as any).access_token).nameid)).then((response) => {
       this.pacientes = response;
+      console.log("-" + (this.jwt.decodeToken((this.usuario.currentUserValue as any).access_token).nameid));
     }, (error) => {
       console.log("Error: " + error.statusText);
     })
@@ -174,8 +176,7 @@ export class PerfilDoctorPage implements OnInit {
   }
   agendar() {
     this.hora_cita = this.hora_cita.substr(11, 5);
-    console.log(this.hora_cita)
-    if (!this.n_disponibles.indexOf(this.hora_cita)) {
+    //if (!this.n_disponibles.indexOf(this.hora_cita)) {
       //Crear Cita
       let cita = {
         "Fecha": this.fecha_cita,
@@ -184,10 +185,11 @@ export class PerfilDoctorPage implements OnInit {
         "IDMedico": this.medico.IDMedico,
         "IDPaciente": this.IDPaciente
       }
+      console.log('entro1');
       this.controller.create(cita);
-    } else {
+    //} else {
       //Hora No Disponible
-    }
+    //}
   }
 
 }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CartService {
-  private cart: Array<ServicioP | PromocionP>;
+  private cart: Array<ServicioP | PromocionP> = new Array<ServicioP | PromocionP>();
   private cartItemCount = new BehaviorSubject(0);
   constructor() { }
   getCart() {
@@ -26,18 +26,20 @@ export class CartService {
 
   addProduct(product: ServicioP | PromocionP) {
     var flag = false;
-    for (let data of this.cart) {
-      if (this.type(product)) {
-        if ((data as ServicioP).IDServicio == product.IDServicio) {
-          data.Cantidad += 1;
-          data.PrecioT = data.Cantidad*data.PrecioU;
-          flag = true;
-        }
-      } else {
-        if ((data as PromocionP).IDPromocion == product.IDPromocion) {
-          data.Cantidad += 1;
-          data.PrecioT = data.Cantidad*data.PrecioU;
-          flag = true;
+    if (this.cart.length > 0) {
+      for (let data of this.cart) {
+        if (this.type(product)) {
+          if ((data as ServicioP).IDServicio == product.IDServicio) {
+            data.Cantidad += 1;
+            data.PrecioT = data.Cantidad * data.PrecioU;
+            flag = true;
+          }
+        } else {
+          if ((data as PromocionP).IDPromocion == product.IDPromocion) {
+            data.Cantidad += 1;
+            data.PrecioT = data.Cantidad * data.PrecioU;
+            flag = true;
+          }
         }
       }
     }
@@ -54,7 +56,7 @@ export class CartService {
         if ((data as ServicioP).IDServicio == product.IDServicio) {
           if (data.Cantidad > 1) {
             data.Cantidad -= 1;
-            data.PrecioT = data.Cantidad*data.PrecioU;
+            data.PrecioT = data.Cantidad * data.PrecioU;
           } else {
             this.cart.splice(this.cart.indexOf(data), 1);
           }
@@ -63,7 +65,7 @@ export class CartService {
         if ((data as PromocionP).IDPromocion == product.IDPromocion) {
           if (data.Cantidad > 1) {
             data.Cantidad -= 1;
-            data.PrecioT = data.Cantidad*data.PrecioU;
+            data.PrecioT = data.Cantidad * data.PrecioU;
           } else {
             this.cart.splice(this.cart.indexOf(data), 1);
           }

@@ -67,7 +67,7 @@
         <ion-label>Paciente</ion-label>
         <ion-select mode="ios" placeholder="Paciente..." [(ngModel)]="IDPaciente">
           <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.IDPaciente">
-            {{paciente.Nombre}} {{paciente.Apellido}}
+            {{paciente?.Nombre}} {{paciente?.Apellido}}
           </ion-select-option>
         </ion-select>
       </ion-item>

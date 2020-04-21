@@ -92,6 +92,7 @@ export class CitasControllerService {
   }
   //Hacer una Cita
   create(cita) {
+    console.log('entro2');
     const httpOptions = { headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json'}) }; 
     console.log(JSON.stringify(cita)); 
     this.http.post('https://localhost:44380/api/citas',JSON.stringify(cita),httpOptions)

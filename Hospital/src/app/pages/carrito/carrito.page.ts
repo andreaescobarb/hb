@@ -1,6 +1,7 @@
 import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { ServicioP, PromocionP } from 'src/app/servicio';
+import { ServicioP, PromocionP, ServiciosEnPromocion, Servicio } from 'src/app/servicio';
+import { ServiciosControllerService } from 'src/app/services/servicios-controller.service';
 
 @Component({
   selector: 'app-carrito',
@@ -9,8 +10,9 @@ import { ServicioP, PromocionP } from 'src/app/servicio';
 })
 export class CarritoPage implements OnInit {
   carrito;
-  constructor(private cartS:CartService) { }
-  ionViewWillEnter(){
+  servicios: Array<Servicio> = new Array<Servicio>();
+  constructor(private cartS: CartService, private controlador:ServiciosControllerService) { }
+  ionViewWillEnter() {
     this.carrito = this.cartS.getCart();
   }
   ngOnInit() {
@@ -21,5 +23,10 @@ export class CarritoPage implements OnInit {
     } else
       return false;
   }
-
+  addProduct(product) {
+    this.cartS.addProduct(product);
+  }
+  removeProduct(product) {
+    this.cartS.removeProduct(product);
+  }
 }

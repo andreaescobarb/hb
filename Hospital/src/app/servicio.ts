@@ -21,6 +21,7 @@ export interface PromocionP{
     "Nombre":string,
     "Detalle":string,
     "Servicios":Array<ServiciosEnPromocion>,
+    "Servicio":Array<Servicio>,
     "FechaExpiracion":string,
     "Cantidad":number,
     "PrecioU": number,

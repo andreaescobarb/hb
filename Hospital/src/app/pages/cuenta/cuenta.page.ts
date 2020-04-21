@@ -2,6 +2,8 @@ import { Pacientes } from './../../servicio';
 import { Component, OnInit } from '@angular/core';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { JwtHelper } from 'src/app/helpers/jwthelper';
 
 @Component({
   selector: 'app-cuenta',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 export class CuentaPage implements OnInit {
   pacientes: Array<Pacientes>;
   details = "/menu/cuenta/";
-  constructor(private controller: PacientesControllerService, private router: Router) { }
+  constructor(private controller: PacientesControllerService, private router: Router, private usuario:AuthenticationService, private jwt:JwtHelper) { }
   ionViewWillEnter() {
     this.getLstPacientes();
   }
@@ -33,14 +35,14 @@ export class CuentaPage implements OnInit {
     });
   }
   getLstPacientes(): any {
-    this.controller.getPacientesU("-"+"id").then((response) => {
+    this.controller.getPacientesU("-" + (this.jwt.decodeToken((this.usuario.currentUserValue as any).access_token).nameid)).then((response) => {
       this.pacientes = response;
     }, (error) => {
       console.log("Error: " + error.statusText);
     });
   }
   doRefresh(event) {
-    this.controller.getPacientesU("-"+"id").then((response) => {
+    this.controller.getPacientesU("-" + (this.jwt.decodeToken((this.usuario.currentUserValue as any).access_token).nameid)).then((response) => {
       this.pacientes = response;
       event.target.complete();
     }, (error) => {

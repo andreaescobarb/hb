@@ -10,21 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MisCitasPage implements OnInit {
   citas : Array<Cita>;
-  medicos : Array<Medico>;
+  medicos : Array<Medico> = new Array<Medico>();
   id:string;
   constructor(private controller:CitasControllerService, private activatedRoute: ActivatedRoute) { }
   ionViewWillEnter(){
-    this.id = this.activatedRoute.snapshot.paramMap.get('doc');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getCitas();
   }
   ngOnInit() {
   }
   getCitas(){
-    this.controller.getCitasU(("-" + this.id)).then((response) => {
+    this.controller.getCitasU(("-"+this.id)).then((response) => {
       this.citas = response;
       for (let cita of this.citas) {
         this.controller.getMedico(cita.IDMedico).then((response) => {
-          this.medicos.push(response[0]);
+          this.medicos.push((response[0]) as Medico);
         }, (error) => {
           console.log("Error: " + error.statusText);
         })

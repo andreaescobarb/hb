@@ -85,6 +85,7 @@ export class PromocionesDetailsPage implements OnInit {
       "Nombre":this.promocion.Nombre,
       "Detalle":this.promocion.Detalle,
       "Servicios": ((this.paquete as unknown) as Array<ServiciosEnPromocion>),
+      "Servicio": this.servicios,
       "FechaExpiracion":this.promocion.FechaExpiracion,
       "Cantidad": 1,
       "PrecioU": precio,
