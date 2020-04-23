@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PacientesControllerService } from 'src/app/services/pacientes-controller.service';
 import { Router } from '@angular/router';
 import { Nacionalidad, Ciudad, Residencia, User, Usuario } from 'src/app/servicio';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-inscribir-otro',
@@ -26,7 +27,7 @@ export class InscribirOtroPage implements OnInit {
     "Residencia": 0,
     "IDUser": ""
   };
-  constructor(private controller: PacientesControllerService, private router: Router, private usuario: JwtHelper) { }
+  constructor(private controller: PacientesControllerService, private router: Router, private usuario:AuthenticationService, private jwt: JwtHelper) { }
   ionViewWillEnter() {
     this.getLstNacionalidades();
     this.getLstCiudades();
@@ -40,7 +41,7 @@ export class InscribirOtroPage implements OnInit {
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
       //this.router.navigate(['menu', 'tabs']);
-      this.paciente.IDUser = this.usuario.decodeToken(localStorage.getItem('currentUser')).nameid;
+      this.paciente.IDUser = this.jwt.decodeToken((this.usuario.currentUserValue as any).access_token).nameid;
       this.controller.create(this.paciente);
       this.router.navigate(['menu', 'tabs']);
     }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Paciente, Nacionalidad, Residencia, Ciudad, Usuario } from './../../servicio';
 import { PacientesControllerService } from './../../services/pacientes-controller.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { nameid } from '../register/register.page';
 
 @Component({
   selector: 'app-user-data',
@@ -26,7 +28,7 @@ export class UserDataPage implements OnInit {
     "Residencia": 0,
     "IDUser": ""
   };
-  constructor(private controller: PacientesControllerService, private router: Router, private usuario:JwtHelper) { }
+  constructor(private controller: PacientesControllerService, private router: Router, private usuario: AuthenticationService, private jwt: JwtHelper) { }
   ionViewWillEnter() {
     this.getLstNacionalidades();
     this.getLstCiudades();
@@ -39,33 +41,34 @@ export class UserDataPage implements OnInit {
     if (this.paciente.Nombre != "" && this.paciente.Apellido != ""
       && this.paciente.Identidad != "" && this.paciente.Genero != undefined
       && this.paciente.IDNacionalidad != undefined) {
-      this.paciente.IDUser = this.usuario.decodeToken(localStorage.getItem('currentUser')).nameid;
+        console.log(nameid);
+      this.paciente.IDUser = nameid;
       this.controller.create(this.paciente);
-      this.router.navigate(['menu', 'tabs']);
+      this.router.navigate(['login']);
     }
   }
-getLstNacionalidades() {
-  this.controller.getNacionalidades().then((response) => {
-    this.Nacionalidades = response;
-  }, (error) => {
-    console.log("Error: " + error.statusText);
-  })
-}
-getLstCiudades() {
-  this.controller.getCiudades().then((response) => {
-    this.Ciudades = response;
-  }, (error) => {
-    console.log("Error: " + error.statusText);
-  })
-}
-getLstResidencias(id) {
-  this.controller.getResidencias(id).then((response) => {
-    this.Residencias = response;
-  }, (error) => {
-    console.log("Error: " + error.statusText);
-  })
-}
-onChange() {
-  this.getLstResidencias(this.paciente.Ciudad);
-}
+  getLstNacionalidades() {
+    this.controller.getNacionalidades().then((response) => {
+      this.Nacionalidades = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  getLstCiudades() {
+    this.controller.getCiudades().then((response) => {
+      this.Ciudades = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  getLstResidencias(id) {
+    this.controller.getResidencias(id).then((response) => {
+      this.Residencias = response;
+    }, (error) => {
+      console.log("Error: " + error.statusText);
+    })
+  }
+  onChange() {
+    this.getLstResidencias(this.paciente.Ciudad);
+  }
 }

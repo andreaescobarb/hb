@@ -6,7 +6,7 @@ import { User } from '../../models/users'
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RegisterService } from 'src/app/services/register.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
+export var nameid;
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -35,7 +35,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     )
   ]
 })
-
 export class RegisterPage implements OnInit {
 
   frmSignup: FormGroup;
@@ -79,6 +78,7 @@ export class RegisterPage implements OnInit {
       .toPromise()
       .then(response => {
         console.log(response);
+        nameid = response.id;
         this.router.navigate(['user-data']);
       }, error => {
         console.log(error);

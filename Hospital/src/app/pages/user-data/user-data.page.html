@@ -32,12 +32,11 @@
   <ion-item>
     <ion-label>Género</ion-label>
     <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.Genero">
-      <ion-select-option value="f">Femenino</ion-select-option>
-      <ion-select-option value="m">Masculino</ion-select-option>
+      <ion-select-option value="F">Femenino</ion-select-option>
+      <ion-select-option value="M">Masculino</ion-select-option>
     </ion-select>
   </ion-item>
   <p></p>
-
   <ion-item>
     <ion-label>Nacionalidad</ion-label>
     <ion-select mode="ios" placeholder="Seleccione uno" [(ngModel)]="paciente.IDNacionalidad" [value] = "paciente.IDNacionalidad">
