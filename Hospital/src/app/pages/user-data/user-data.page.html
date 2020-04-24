@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <div class="logo">
+    <img src="assets/img/hbparreglado.PNG">
+  </div>
   <ion-item>
     <ion-label position="floating">Primer Nombre</ion-label>
     <ion-input type="text" [(ngModel)]="paciente.Nombre"></ion-input>
@@ -66,5 +69,5 @@
       </ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button shape="round" color="primary" expand="block" (click)="create()">Registrarse</ion-button>
+  <ion-button shape="round" color="success" expand="block" (click)="create()">Registrarse</ion-button>
 </ion-content>

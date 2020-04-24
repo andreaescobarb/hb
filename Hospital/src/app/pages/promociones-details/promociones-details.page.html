@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content>
+  <div class="logo">
+    <img src="assets/img/hbparreglado.PNG">
+  </div>
   <!-- Promo -->
   <ion-card mode="ios">
     <ion-card-header>
@@ -25,8 +28,8 @@
     <ion-footer>
       <ion-label text-wrap>Ahorro Total: {{Ahorro}}</ion-label>
       <br/>
-      <ion-button (click)="presentAlert()">Cotizar Precio</ion-button>
-      <ion-button (click)="add()">Añadir al Carrito</ion-button>
+      <ion-button color="success" (click)="presentAlert()">Cotizar Precio</ion-button>
+      <ion-button color="success" (click)="add()">Añadir al Carrito</ion-button>
     </ion-footer>
   </ion-card>
 

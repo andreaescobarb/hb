@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" >
+  <div class="logo">
+    <img src="assets/img/hbparreglado.PNG">
+  </div>
   <form [formGroup]="frmSignup">
     <ion-item>
       <ion-label position="floating">
@@ -97,7 +100,7 @@
     </div>
   </form>
     <ion-button
-      [disabled]="loading" (click)="registrarUsuario()" shape="round" color="primary" expand="block">
+      [disabled]="loading" (click)="registrarUsuario()" shape="round" color="success" expand="block">
       Continuar
     </ion-button>
 </ion-content>
